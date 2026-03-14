@@ -788,6 +788,312 @@ function initClickSparks() {
 }
 
 // ===================================
+// 3D Scene with Three.js
+// ===================================
+
+/**
+ * Initialize 3D background scene
+ */
+function init3DScene() {
+    const canvas = document.getElementById('hero-3d-canvas');
+    if (!canvas) return;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    camera.position.z = 5;
+
+    // Create particles
+    const particlesGeometry = new THREE.BufferGeometry();
+    const particlesCount = 800;
+    const posArray = new Float32Array(particlesCount * 3);
+    
+    for(let i = 0; i < particlesCount * 3; i++) {
+        posArray[i] = (Math.random() - 0.5) * 20;
+    }
+    
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+    
+    const particlesMaterial = new THREE.PointsMaterial({
+        size: 0.015,
+        color: 0x6495ed,
+        transparent: true,
+        opacity: 0.8,
+        blending: THREE.AdditiveBlending
+    });
+    
+    const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+    scene.add(particlesMesh);
+
+    // Create floating geometric shapes
+    const shapes = [];
+    const geometries = [
+        new THREE.OctahedronGeometry(0.3),
+        new THREE.TetrahedronGeometry(0.3),
+        new THREE.IcosahedronGeometry(0.3),
+        new THREE.TorusGeometry(0.3, 0.1, 16, 100)
+    ];
+    
+    for(let i = 0; i < 15; i++) {
+        const geometry = geometries[Math.floor(Math.random() * geometries.length)];
+        const material = new THREE.MeshPhongMaterial({
+            color: Math.random() > 0.5 ? 0x4b0082 : 0x6495ed,
+            transparent: true,
+            opacity: 0.6,
+            wireframe: Math.random() > 0.5
+        });
+        const mesh = new THREE.Mesh(geometry, material);
+        
+        mesh.position.x = (Math.random() - 0.5) * 10;
+        mesh.position.y = (Math.random() - 0.5) * 10;
+        mesh.position.z = (Math.random() - 0.5) * 10;
+        
+        mesh.rotation.x = Math.random() * Math.PI;
+        mesh.rotation.y = Math.random() * Math.PI;
+        
+        mesh.userData = {
+            rotationSpeed: {
+                x: (Math.random() - 0.5) * 0.01,
+                y: (Math.random() - 0.5) * 0.01,
+                z: (Math.random() - 0.5) * 0.01
+            },
+            floatSpeed: Math.random() * 0.002 + 0.001,
+            floatOffset: Math.random() * Math.PI * 2
+        };
+        
+        shapes.push(mesh);
+        scene.add(mesh);
+    }
+
+    // Add lights
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    scene.add(ambientLight);
+    
+    const pointLight = new THREE.PointLight(0x6495ed, 2, 50);
+    pointLight.position.set(5, 5, 5);
+    scene.add(pointLight);
+
+    const pointLight2 = new THREE.PointLight(0x4b0082, 1.5, 50);
+    pointLight2.position.set(-5, -5, -5);
+    scene.add(pointLight2);
+
+    // Mouse interaction
+    let mouseX = 0;
+    let mouseY = 0;
+    
+    document.addEventListener('mousemove', (event) => {
+        mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+        mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+    });
+
+    // Animation loop
+    let time = 0;
+    function animate() {
+        requestAnimationFrame(animate);
+        time += 0.01;
+        
+        // Rotate particles
+        particlesMesh.rotation.y += 0.001;
+        particlesMesh.rotation.x += 0.0005;
+        
+        // Animate shapes
+        shapes.forEach((shape, index) => {
+            shape.rotation.x += shape.userData.rotationSpeed.x;
+            shape.rotation.y += shape.userData.rotationSpeed.y;
+            shape.rotation.z += shape.userData.rotationSpeed.z;
+            
+            shape.position.y += Math.sin(time + shape.userData.floatOffset) * shape.userData.floatSpeed;
+        });
+        
+        // Camera follows mouse
+        camera.position.x += (mouseX * 0.5 - camera.position.x) * 0.05;
+        camera.position.y += (mouseY * 0.5 - camera.position.y) * 0.05;
+        camera.lookAt(scene.position);
+        
+        renderer.render(scene, camera);
+    }
+    
+    animate();
+
+    // Handle resize
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+}
+
+// ===================================
+// GSAP Scroll Animations
+// ===================================
+
+/**
+ * Initialize GSAP scroll-triggered animations
+ */
+function initGSAPAnimations() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+    
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Animate cards with stagger
+    gsap.utils.toArray('.about-card, .event-card, .benefit-item, .reward-card').forEach((card, i) => {
+        gsap.from(card, {
+            scrollTrigger: {
+                trigger: card,
+                start: 'top 85%',
+                toggleActions: 'play none none reverse'
+            },
+            y: 60,
+            opacity: 0,
+            scale: 0.9,
+            rotationX: -15,
+            duration: 0.8,
+            ease: 'power3.out',
+            delay: i * 0.1
+        });
+    });
+
+    // Parallax effect on sections
+    gsap.utils.toArray('.section').forEach(section => {
+        gsap.to(section, {
+            scrollTrigger: {
+                trigger: section,
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: 1
+            },
+            y: -50,
+            ease: 'none'
+        });
+    });
+
+    // Journey stages with special animation
+    gsap.utils.toArray('.journey-stage').forEach((stage, i) => {
+        gsap.from(stage, {
+            scrollTrigger: {
+                trigger: stage.parentElement,
+                start: 'top 80%',
+                toggleActions: 'play none none reverse'
+            },
+            y: 80,
+            opacity: 0,
+            scale: 0.8,
+            duration: 0.7,
+            ease: 'back.out(1.4)',
+            delay: i * 0.15
+        });
+    });
+
+    // Stats counter animation
+    gsap.utils.toArray('.stat-number').forEach(stat => {
+        const target = stat.textContent;
+        const isNumber = /^\d+/.test(target);
+        
+        if (isNumber) {
+            const num = parseInt(target);
+            gsap.from(stat, {
+                scrollTrigger: {
+                    trigger: stat,
+                    start: 'top 90%',
+                    toggleActions: 'play none none reverse'
+                },
+                textContent: 0,
+                duration: 2,
+                ease: 'power1.out',
+                snap: { textContent: 1 },
+                onUpdate: function() {
+                    stat.textContent = Math.ceil(this.targets()[0].textContent) + '+';
+                }
+            });
+        }
+    });
+}
+
+// ===================================
+// 3D Card Tilt Effect
+// ===================================
+
+/**
+ * Add 3D tilt effect to cards on mouse move
+ */
+function init3DCardTilt() {
+    const cards = document.querySelectorAll('.about-card, .event-card, .benefit-item, .reward-card');
+    
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = (y - centerY) / 10;
+            const rotateY = (centerX - x) / 10;
+            
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+        });
+    });
+}
+
+// ===================================
+// Interactive Cursor
+// ===================================
+
+/**
+ * Create custom interactive cursor
+ */
+function initCustomCursor() {
+    const cursor = document.createElement('div');
+    cursor.className = 'custom-cursor';
+    cursor.innerHTML = '<div class="cursor-dot"></div><div class="cursor-ring"></div>';
+    document.body.appendChild(cursor);
+    
+    const dot = cursor.querySelector('.cursor-dot');
+    const ring = cursor.querySelector('.cursor-ring');
+    
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
+    
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+    
+    function animateCursor() {
+        cursorX += (mouseX - cursorX) * 0.2;
+        cursorY += (mouseY - cursorY) * 0.2;
+        
+        dot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+        ring.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
+        
+        requestAnimationFrame(animateCursor);
+    }
+    
+    animateCursor();
+    
+    // Hover effects
+    const interactiveElements = document.querySelectorAll('a, button, .btn-primary, .btn-secondary, .event-card, .about-card');
+    
+    interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursor.classList.add('active');
+        });
+        
+        el.addEventListener('mouseleave', () => {
+            cursor.classList.remove('active');
+        });
+    });
+}
+
+// ===================================
 // Initialization
 // ===================================
 
@@ -795,13 +1101,29 @@ function initClickSparks() {
  * Initialize all features when DOM is ready
  */
 function init() {
-    console.log('PRAKALP 2026 - Website initialized');
+    console.log('PRAKALP 2026 - Sankraman (3D Enhanced) initialized');
 
     // Initialize navigation
     initNavigation();
 
     // Initialize scroll animations
     initScrollAnimations();
+
+    // Initialize 3D scene (only on home page)
+    if (document.getElementById('hero-3d-canvas')) {
+        init3DScene();
+    }
+
+    // Initialize GSAP animations
+    initGSAPAnimations();
+
+    // Initialize 3D card tilt
+    init3DCardTilt();
+
+    // Initialize custom cursor (desktop only)
+    if (window.innerWidth > 768) {
+        initCustomCursor();
+    }
 
     // Initialize form validation (only if form exists)
     if (document.getElementById('registrationForm')) {
@@ -836,5 +1158,5 @@ window.PRAKALP = {
     smoothScroll,
     trackEvent,
     validateField,
-    version: '1.0.0'
+    version: '2.0.0-3D'
 };

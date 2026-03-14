@@ -1539,6 +1539,289 @@ p {
    SANKRAMAN Landing Redesign (Index)
    Scoped to .home-page to avoid affecting register page
    =================================== */
+/* ===================================
+   SANKRAMAN Landing Redesign (Index)
+   Scoped to .home-page to avoid affecting register page
+   =================================== */
+
+/* ===================================
+   3D Canvas & Interactive Elements
+   =================================== */
+#hero-3d-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+}
+
+.cursor-dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #6495ed;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+.cursor-ring {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    border: 2px solid rgba(100, 149, 237, 0.6);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
+}
+
+.custom-cursor.active .cursor-dot {
+    width: 14px;
+    height: 14px;
+    background: #e6e6fa;
+}
+
+.custom-cursor.active .cursor-ring {
+    width: 48px;
+    height: 48px;
+    border-color: rgba(230, 230, 250, 0.9);
+    border-width: 3px;
+}
+
+/* Enhanced card hover effects */
+.home-page .about-card,
+.home-page .event-card,
+.home-page .benefit-item,
+.home-page .reward-card {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+.home-page .about-card:hover,
+.home-page .event-card:hover,
+.home-page .benefit-item:hover,
+.home-page .reward-card:hover {
+    box-shadow: 
+        0 30px 60px rgba(6, 2, 15, 0.7),
+        0 0 60px rgba(100, 149, 237, 0.3),
+        inset 0 0 40px rgba(100, 149, 237, 0.1);
+}
+
+/* Glow effect on hover */
+.home-page .btn-primary:hover,
+.home-page .btn-secondary:hover {
+    box-shadow: 
+        0 18px 34px rgba(25, 25, 112, 0.62),
+        0 0 40px rgba(100, 149, 237, 0.5);
+}
+
+/* Journey stage enhanced */
+.home-page .journey-stage {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+.home-page .journey-stage:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 
+        0 25px 50px rgba(6, 2, 15, 0.8),
+        0 0 50px rgba(100, 149, 237, 0.4);
+}
+
+/* Animated gradient overlay */
+.home-page::before {
+    animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+    0%, 100% {
+        opacity: 0.42;
+    }
+    50% {
+        opacity: 0.25;
+    }
+}
+
+/* Particle effect styles */
+.home-page .hero {
+    position: relative;
+    overflow: hidden;
+}
+
+.home-page .hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(100, 149, 237, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+    animation: pulseGlow 4s ease-in-out infinite;
+    z-index: 1;
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(1.1);
+    }
+}
+
+/* Enhanced text reveal animations */
+.home-page .hero-title {
+    text-shadow: 0 0 40px rgba(100, 149, 237, 0.6);
+}
+
+.home-page .gradient-text {
+    position: relative;
+    animation: textGlow 3s ease-in-out infinite;
+}
+
+@keyframes textGlow {
+    0%, 100% {
+        text-shadow: 0 0 20px rgba(100, 149, 237, 0.8);
+    }
+    50% {
+        text-shadow: 0 0 40px rgba(100, 149, 237, 1), 0 0 60px rgba(75, 0, 130, 0.6);
+    }
+}
+
+/* Section dividers with glow */
+.home-page .section {
+    position: relative;
+}
+
+.home-page .section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 5%;
+    width: 90%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(100, 149, 237, 0.6), transparent);
+    opacity: 0.5;
+}
+
+/* Interactive elements glow on hover */
+.home-page .nav-link:hover {
+    text-shadow: 0 0 10px rgba(100, 149, 237, 0.8);
+}
+
+/* Stats animation */
+.home-page .stat-number {
+    transition: all 0.3s ease;
+}
+
+.home-page .stat-item:hover .stat-number {
+    transform: scale(1.1);
+    text-shadow: 0 0 30px rgba(100, 149, 237, 0.9);
+}
+
+/* Logo enhanced */
+.home-page .logo {
+    transition: all 0.3s ease;
+}
+
+.home-page .logo:hover h1 {
+    text-shadow: 0 0 20px rgba(230, 230, 250, 0.8);
+}
+
+/* Badge animations */
+.home-page .hero-badge,
+.home-page .section-badge {
+    position: relative;
+    overflow: hidden;
+}
+
+.home-page .hero-badge::before,
+.home-page .section-badge::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(100, 149, 237, 0.3), transparent);
+    animation: badgeShine 3s linear infinite;
+}
+
+@keyframes badgeShine {
+    0% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+    100% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+}
+
+/* Footer enhanced */
+.home-page .footer {
+    position: relative;
+}
+
+.home-page .footer::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(180deg, transparent, rgba(27, 0, 63, 0.8));
+    pointer-events: none;
+}
+
+/* Responsive 3D effects */
+@media (max-width: 768px) {
+    #hero-3d-canvas {
+        opacity: 0.5;
+    }
+    
+    .custom-cursor {
+        display: none;
+    }
+    
+    .home-page .about-card:hover,
+    .home-page .event-card:hover,
+    .home-page .benefit-item:hover,
+    .home-page .reward-card:hover {
+        transform: none;
+    }
+}
+
+/* Loading animation */
+body:not(.loaded) .home-page .hero-content > * {
+    opacity: 0;
+}
+
+body.loaded .home-page .hero-content > * {
+    animation: none;
+}
+
+/* Smooth scroll behavior */
+html.smooth-scroll {
+    scroll-behavior: smooth;
+}
+
 body.home-page {
     --night-indigo: #1b003f;
     --twilight-purple: #4b0082;
