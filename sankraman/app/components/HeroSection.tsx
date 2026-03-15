@@ -122,7 +122,7 @@ export default function HeroSection() {
         </motion.p>
 
         {/* PRAKALP 4.0 — chrome metallic */}
-        <h1 className="font-black leading-none tracking-tight mb-1 hero-title"
+        <h1 className="font-black leading-none tracking-tight mb-2 hero-title"
           style={{ fontSize: 'clamp(3.5rem, 14vw, 10rem)' }}
         >
           <LetterReveal letters={LETTERS_PRAKALP} delay={0.4} className="chrome-text" />
@@ -161,7 +161,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 2.4 }}
-          className="flex flex-col sm:flex-row gap-4 mt-10"
+          className="flex flex-col sm:flex-row gap-4 mt-8"
         >
           <button className="relative h-12 px-9 rounded-full font-bold text-sm text-[#020008] overflow-hidden group flex items-center justify-center">
             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#00E5FF] via-[#1E90FF] to-[#7B2FBE]" />
@@ -184,8 +184,8 @@ export default function HeroSection() {
         transition={{ delay: 3.2, duration: 1 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
-        <span className="text-[9px] uppercase tracking-[0.4em] text-white/30">Scroll to explore</span>
-        <div className="w-[1px] h-10 bg-gradient-to-b from-[#00E5FF] to-transparent" />
+        <span className="text-[10px] uppercase tracking-[0.4em] text-white/30">Scroll to explore</span>
+        <div className="w-[1px] h-12 bg-gradient-to-b from-[#00E5FF] to-transparent" />
       </motion.div>
     </section>
   );

@@ -10,7 +10,7 @@ export default function Footer() {
         }}
       />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-8 md:px-12 pt-12 pb-6">
+      <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-12 pt-12 pb-6">
         {/* Main row */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 pb-8 border-b border-white/6">
           {/* Brand */}
@@ -35,7 +35,7 @@ export default function Footer() {
           {/* Links */}
           <div className="flex gap-6 text-sm text-white/30">
             {['Privacy', 'Terms', 'Contact'].map((l) => (
-              <a key={l} href="#" className="hover:text-[#00E5FF] transition-colors duration-200">
+              <a key={l} href="#" className="hover:text-[#00E5FF] transition-colors duration-200 tracking-wider">
                 {l}
               </a>
             ))}
@@ -43,7 +43,7 @@ export default function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="text-center pt-6 pb-2 text-[10px] tracking-[0.4em] uppercase text-white/20">
+        <div className="text-center pt-6 pb-4 text-xs tracking-[0.3em] uppercase text-white/20">
           © 2025 IEEE × WiE × Project Cell, CRCE. All rights reserved.
         </div>
       </div>

@@ -49,7 +49,7 @@ export default function Navbar() {
           >
             <div>
               <div className="font-black text-lg tracking-widest text-white leading-none">PRAKALP 4.0</div>
-              <div className="text-[10px] tracking-[0.35em] text-[#00E5FF] uppercase">Sankraman</div>
+              <div className="text-[11px] tracking-[0.35em] text-[#00E5FF] uppercase mt-0.5">Sankraman</div>
             </div>
           </a>
 
@@ -60,7 +60,7 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className="px-4 py-1.5 text-sm font-medium text-[#B388FF]/80 hover:text-[#00E5FF] transition-colors duration-200 rounded-full hover:bg-white/5"
+                className="px-4 py-1.5 text-sm font-medium text-[#B388FF]/80 hover:text-[#00E5FF] transition-all duration-200 rounded-full hover:bg-white/5"
               >
                 {link.label}
               </a>
@@ -72,32 +72,41 @@ export default function Navbar() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
-              className="relative min-h-[38px] px-6 py-2.5 rounded-full font-bold text-sm text-[#020008] overflow-hidden group"
+              className="relative h-10 px-6 rounded-full font-bold text-sm text-[#020008] overflow-hidden group flex items-center justify-center"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-[#00E5FF] via-[#7B2FBE] to-[#1E90FF] opacity-90 group-hover:opacity-100 transition-opacity" />
-              <span className="relative z-10">Register Now</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-[#00E5FF] via-[#7B2FBE] to-[#1E90FF] opacity-90 group-hover:opacity-100 transition-opacity duration-300" />
+              <span className="relative z-10 tracking-wider">Register Now</span>
             </motion.button>
           </div>
 
-          {/* Mobile menu toggle */}
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden flex flex-col gap-1.5 p-2 z-10"
-            aria-label="Toggle menu"
-          >
-            <motion.span
-              animate={{ rotate: mobileOpen ? 45 : 0, y: mobileOpen ? 7 : 0 }}
-              className="block w-6 h-0.5 bg-[#00E5FF] rounded"
-            />
-            <motion.span
-              animate={{ opacity: mobileOpen ? 0 : 1 }}
-              className="block w-6 h-0.5 bg-[#B388FF] rounded"
-            />
-            <motion.span
-              animate={{ rotate: mobileOpen ? -45 : 0, y: mobileOpen ? -7 : 0 }}
-              className="block w-6 h-0.5 bg-[#00E5FF] rounded"
-            />
-          </button>
+          {/* Mobile CTA + menu toggle */}
+          <div className="md:hidden flex items-center gap-3">
+            <motion.button
+              whileTap={{ scale: 0.95 }}
+              className="relative h-8 px-4 rounded-full font-bold text-xs text-[#020008] overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-[#00E5FF] via-[#7B2FBE] to-[#1E90FF]" />
+              <span className="relative z-10 tracking-wider">Register</span>
+            </motion.button>
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="flex flex-col gap-1.5 p-2 z-10"
+              aria-label="Toggle menu"
+            >
+              <motion.span
+                animate={{ rotate: mobileOpen ? 45 : 0, y: mobileOpen ? 7 : 0 }}
+                className="block w-6 h-0.5 bg-[#00E5FF] rounded"
+              />
+              <motion.span
+                animate={{ opacity: mobileOpen ? 0 : 1 }}
+                className="block w-6 h-0.5 bg-[#B388FF] rounded"
+              />
+              <motion.span
+                animate={{ rotate: mobileOpen ? -45 : 0, y: mobileOpen ? -7 : 0 }}
+                className="block w-6 h-0.5 bg-[#00E5FF] rounded"
+              />
+            </button>
+          </div>
         </div>
       </motion.nav>
 
@@ -130,7 +139,7 @@ export default function Navbar() {
             initial={{ x: 40, opacity: 0 }}
             animate={{ x: mobileOpen ? 0 : 40, opacity: mobileOpen ? 1 : 0 }}
             transition={{ duration: 0.3, delay: navLinks.length * 0.06 }}
-            className="mt-4 px-6 py-3 rounded-full font-bold text-white bg-gradient-to-r from-[#00E5FF] via-[#7B2FBE] to-[#1E90FF]"
+            className="mt-4 px-6 py-3 rounded-full font-bold text-white bg-gradient-to-r from-[#00E5FF] via-[#7B2FBE] to-[#1E90FF] tracking-wider"
           >
             Register Now
           </motion.button>

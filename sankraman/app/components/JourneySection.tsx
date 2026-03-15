@@ -10,7 +10,7 @@ const phases = [
     subtitle: 'Where problems are identified and concepts are formed',
     description:
       'The journey begins with understanding the world as it is — full of complex, real-world challenges. Participants identify problems, research root causes, and crystallise an idea that could create change.',
-    icon: '💡',
+    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7" style={{color: '#FFB347'}}><path d="M9 18h6M10 22h4M12 2a7 7 0 0 1 4 12.7V17a1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1v-2.3A7 7 0 0 1 12 2Z"/></svg>,
     color: '#FFB347',
     glow: 'rgba(255,179,71,0.3)',
   },
@@ -20,7 +20,7 @@ const phases = [
     subtitle: 'Where ideas are structured into workable solutions',
     description:
       'Raw ideas transform into structured blueprints. Teams architect their solutions — planning workflows, designing interfaces, and mapping technical requirements with precision.',
-    icon: '🖥️',
+    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7" style={{color: '#00E5FF'}}><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>,
     color: '#00E5FF',
     glow: 'rgba(0,229,255,0.3)',
   },
@@ -30,7 +30,7 @@ const phases = [
     subtitle: 'Where projects are built, tested, and refined',
     description:
       'The most intensive phase — prototypes are built, tested against real conditions, iterated upon, and refined until the solution is robust, feasible, and impactful.',
-    icon: '⚙️',
+    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7" style={{color: '#7B2FBE'}}><circle cx="12" cy="12" r="3"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>,
     color: '#7B2FBE',
     glow: 'rgba(123,47,190,0.3)',
   },
@@ -40,7 +40,7 @@ const phases = [
     subtitle: 'Where solutions create measurable benefits for society',
     description:
       'The final Sankraman — solutions step out of the lab and into the world, creating measurable, tangible benefits. Ideas become change. Concepts become reality.',
-    icon: '📈',
+    icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7" style={{color: '#1E90FF'}}><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>,
     color: '#1E90FF',
     glow: 'rgba(30,144,255,0.3)',
   },
@@ -80,7 +80,7 @@ function PhaseCard({ phase, index }: { phase: typeof phases[0]; index: number })
 
         <div className="relative z-10">
           <div className="flex items-start gap-4 mb-4">
-            <span className="text-3xl">{phase.icon}</span>
+            <span className="text-3xl flex-shrink-0">{phase.icon}</span>
             <div>
               <div
                 className="text-xs font-bold tracking-[0.4em] uppercase mb-1"
@@ -189,7 +189,7 @@ export default function JourneySection() {
         </div>
 
         {/* Phase cards */}
-        <div className="flex flex-col gap-0 items-center">
+        <div className="flex flex-col gap-2 items-center">
           {phases.map((phase, i) => (
             <PhaseCard key={phase.id} phase={phase} index={i} />
           ))}
