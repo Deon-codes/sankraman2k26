@@ -265,9 +265,9 @@ export default function JourneySection() {
             style={{ fontSize: 'clamp(2rem, 7vw, 5rem)' }}
           >
             <span className="chrome-text">From</span>{' '}
-            <span className="neon-gradient-text">Idea</span>{' '}
+            <span className="text-white">Idea</span>{' '}
             <span className="chrome-text">to</span>{' '}
-            <span className="neon-gradient-text">Impact</span>
+            <span className="text-white">Impact</span>
           </motion.h2>
         </div>
 

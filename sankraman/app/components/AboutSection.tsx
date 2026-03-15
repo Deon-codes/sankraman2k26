@@ -130,7 +130,7 @@ export default function AboutSection() {
             <p className="text-white/40 text-sm tracking-[0.2em] uppercase">
               Engineering innovation bridges existing challenges with smart, sustainable solutions
             </p>
-            <p className="neon-gradient-text font-bold text-xl md:text-2xl tracking-wider mt-3">
+            <p className="text-white font-bold text-xl md:text-2xl tracking-wider mt-3">
               Engineering the Change
             </p>
           </div>

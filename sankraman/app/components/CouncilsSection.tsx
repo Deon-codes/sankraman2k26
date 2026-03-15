@@ -167,7 +167,7 @@ export default function CouncilsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="font-black neon-gradient-text"
+            className="font-black text-white"
             style={{ fontSize: 'clamp(2rem, 7vw, 5rem)' }}
           >
             One Vision

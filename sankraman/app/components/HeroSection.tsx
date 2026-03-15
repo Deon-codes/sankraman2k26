@@ -98,7 +98,7 @@ export default function HeroSection() {
           data-text="SANKRAMAN"
           style={{ fontSize: 'clamp(1.5rem, 6vw, 4rem)' }}
         >
-          <LetterReveal letters={LETTERS_SANKRAMAN} delay={0.9} className="neon-gradient-text" />
+          <LetterReveal letters={LETTERS_SANKRAMAN} delay={0.9} className="text-white" />
         </div>
 
         {/* Tagline */}
