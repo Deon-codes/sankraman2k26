@@ -212,9 +212,8 @@ export default function CouncilsSection() {
               ))}
             </div>
             <p className="text-white/50 text-sm leading-relaxed max-w-2xl mx-auto">
-              A first-of-its-kind collaboration between three powerful councils at CRCE — bringing
-              together technical expertise, inclusive leadership, and applied innovation to deliver
-              PRAKALP Sankraman.
+              A collaborative effort by three councils at CRCE — combining technical knowledge,
+              inclusive leadership, and hands-on innovation to bring PRAKALP Sankraman to life.
             </p>
           </div>
         </motion.div>
