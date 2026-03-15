@@ -1,8 +1,7 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import { motion, useScroll, useTransform, MotionValue } from 'framer-motion';
-import gsap from 'gsap';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 const LETTERS_PRAKALP = 'PRAKALP 4.0'.split('');
 const LETTERS_SANKRAMAN = 'SANKRAMAN'.split('');
@@ -39,17 +38,6 @@ export default function HeroSection() {
   const blurPx = useTransform(scrollYProgress, [0, 0.7], [0, 20]);
   const filter = useTransform(blurPx, (v) => v > 0 ? `blur(${v}px)` : 'none');
 
-  // Energy line streak animation on mount
-  const streakRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (!streakRef.current) return;
-    gsap.fromTo(
-      streakRef.current.querySelectorAll('.streak'),
-      { scaleX: 0, opacity: 0 },
-      { scaleX: 1, opacity: 1, duration: 1.5, stagger: 0.15, ease: 'expo.out', delay: 1.2 }
-    );
-  }, []);
-
   return (
     <section
       ref={sectionRef}
@@ -67,30 +55,6 @@ export default function HeroSection() {
           `,
         }}
       />
-
-      {/* Energy streaks (inspired by poster 2 vortex trails) */}
-      <div ref={streakRef} className="absolute inset-0 pointer-events-none overflow-hidden">
-        {[
-          { top: '30%', left: '-10%', width: '55%', rotate: '-25deg', color: 'from-[#00E5FF]' },
-          { top: '50%', left: '-5%', width: '45%', rotate: '-15deg', color: 'from-[#7B2FBE]' },
-          { top: '35%', right: '-10%', width: '55%', rotate: '20deg', color: 'from-[#1E90FF]', isRight: true },
-          { top: '55%', right: '-5%', width: '40%', rotate: '10deg', color: 'from-[#00E5FF]', isRight: true },
-        ].map((s, i) => (
-          <div
-            key={i}
-            className={`streak absolute h-[1px] bg-gradient-to-r ${s.color} to-transparent ${(s as any).isRight ? 'right-0' : 'left-0'}`}
-            style={{
-              top: s.top,
-              [(s as any).isRight ? 'right' : 'left']: (s as any).isRight ? s.right : s.left,
-              width: s.width,
-              transform: `rotate(${s.rotate})`,
-              transformOrigin: (s as any).isRight ? 'right center' : 'left center',
-              boxShadow: `0 0 8px currentColor`,
-              opacity: 0,
-            }}
-          />
-        ))}
-      </div>
 
       {/* Main content */}
       <motion.div
@@ -134,7 +98,7 @@ export default function HeroSection() {
           data-text="SANKRAMAN"
           style={{ fontSize: 'clamp(1.5rem, 6vw, 4rem)' }}
         >
-          <LetterReveal letters={LETTERS_SANKRAMAN} delay={0.9} className="neon-gradient-text" />
+          <LetterReveal letters={LETTERS_SANKRAMAN} delay={0.9} className="text-white" />
         </div>
 
         {/* Tagline */}

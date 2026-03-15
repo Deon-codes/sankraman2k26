@@ -56,13 +56,13 @@ function PhaseCard({ phase, index }: { phase: typeof phases[0]; index: number })
    return (
     <motion.div
       ref={ref}
-      initial={{ x: isEven ? -60 : 60, opacity: 0 }}
-      animate={inView ? { x: 0, opacity: 1 } : {}}
+      initial={{ y: 40, opacity: 0 }}
+      animate={inView ? { y: 0, opacity: 1 } : {}}
       transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
       className="relative w-full"
     >
-      {/* Timeline node — absolutely centered on the line */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+      {/* Timeline node — centered on the line (desktop), left-aligned (mobile) */}
+      <div className="hidden md:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
         <motion.div
           animate={inView ? { scale: [0, 1.3, 1] } : { scale: 0 }}
           transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
@@ -75,7 +75,6 @@ function PhaseCard({ phase, index }: { phase: typeof phases[0]; index: number })
           }}
         >
           {phase.id}
-          {/* Pulse ring */}
           <motion.div
             animate={{ scale: [1, 2], opacity: [0.6, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: 'easeOut', delay: index * 0.5 }}
@@ -85,8 +84,59 @@ function PhaseCard({ phase, index }: { phase: typeof phases[0]; index: number })
         </motion.div>
       </div>
 
-      {/* Content card — placed on left or right half */}
-      <div className={`flex ${isEven ? 'justify-start pr-[calc(50%+48px)]' : 'justify-end pl-[calc(50%+48px)]'}`}>
+      {/* Mobile: node + card stacked vertically */}
+      <div className="md:hidden flex items-start gap-4">
+        {/* Mobile timeline node */}
+        <div className="flex-shrink-0 z-20 mt-1">
+          <motion.div
+            animate={inView ? { scale: [0, 1.3, 1] } : { scale: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
+            className="relative w-12 h-12 rounded-full flex items-center justify-center font-black text-sm"
+            style={{
+              background: '#020008',
+              border: `2px solid ${phase.color}`,
+              boxShadow: `0 0 15px ${phase.glow}, 0 0 30px ${phase.glow.replace('0.3', '0.1')}`,
+              color: phase.color,
+            }}
+          >
+            {phase.id}
+          </motion.div>
+        </div>
+
+        {/* Mobile card — full width */}
+        <motion.div
+          className="flex-1 p-5 rounded-2xl relative overflow-hidden"
+          style={{
+            background: 'rgba(255, 255, 255, 0.04)',
+            backdropFilter: 'blur(24px)',
+            WebkitBackdropFilter: 'blur(24px)',
+            border: '1px solid rgba(255, 255, 255, 0.08)',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5)',
+          }}
+        >
+          <div className="relative z-10">
+            <div className="flex items-start gap-3 mb-3">
+              <span className="text-2xl flex-shrink-0">{phase.icon}</span>
+              <div>
+                <div
+                  className="text-[10px] font-bold tracking-[0.4em] uppercase mb-1"
+                  style={{ color: phase.color }}
+                >
+                  Phase {phase.id}
+                </div>
+                <h3 className="text-lg font-black text-white">{phase.title}</h3>
+              </div>
+            </div>
+            <p className="text-xs font-semibold mb-2" style={{ color: phase.color }}>
+              {phase.subtitle}
+            </p>
+            <p className="text-white/75 text-xs leading-relaxed">{phase.description}</p>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Desktop: card placed on left or right half */}
+      <div className={`hidden md:flex ${isEven ? 'justify-start pr-[calc(50%+48px)]' : 'justify-end pl-[calc(50%+48px)]'}`}>
         <motion.div
           onHoverStart={() => setHovered(true)}
           onHoverEnd={() => setHovered(false)}
@@ -148,7 +198,7 @@ function ScrollLine() {
   return (
     <div
       ref={lineRef}
-      className="absolute left-1/2 -translate-x-1/2 w-[2px] z-0 pointer-events-none"
+      className="hidden md:block absolute left-1/2 -translate-x-1/2 w-[2px] z-0 pointer-events-none"
       style={{ top: '50px', bottom: '50px' }}
     >
       {/* Dim background track */}
@@ -215,9 +265,9 @@ export default function JourneySection() {
             style={{ fontSize: 'clamp(2rem, 7vw, 5rem)' }}
           >
             <span className="chrome-text">From</span>{' '}
-            <span className="neon-gradient-text">Idea</span>{' '}
+            <span className="text-white">Idea</span>{' '}
             <span className="chrome-text">to</span>{' '}
-            <span className="neon-gradient-text">Impact</span>
+            <span className="text-white">Impact</span>
           </motion.h2>
         </div>
 
