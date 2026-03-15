@@ -59,7 +59,7 @@ function PhaseCard({ phase, index }: { phase: typeof phases[0]; index: number })
       initial={{ x: isEven ? -60 : 60, opacity: 0 }}
       animate={inView ? { x: 0, opacity: 1 } : {}}
       transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-      className={`flex items-center gap-6 md:gap-12 ${isEven ? 'flex-row' : 'flex-row-reverse'} w-full`}
+      className={`relative flex items-center gap-6 md:gap-12 ${isEven ? 'flex-row' : 'flex-row-reverse'} w-full`}
     >
       {/* Content card */}
       <motion.div
@@ -98,14 +98,14 @@ function PhaseCard({ phase, index }: { phase: typeof phases[0]; index: number })
         </div>
       </motion.div>
 
-      {/* Timeline node */}
-      <div className="flex flex-col items-center flex-shrink-0">
+      {/* Timeline node — sits on the center line */}
+      <div className="flex flex-col items-center flex-shrink-0 z-10">
         <motion.div
           animate={inView ? { scale: [0, 1.3, 1] } : { scale: 0 }}
           transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
-          className="relative w-12 h-12 rounded-full flex items-center justify-center font-black text-sm z-10"
+          className="relative w-12 h-12 rounded-full flex items-center justify-center font-black text-sm"
           style={{
-            background: `radial-gradient(circle, ${phase.glow} 0%, transparent 70%)`,
+            background: '#020008',
             border: `2px solid ${phase.color}`,
             boxShadow: `0 0 15px ${phase.glow}, 0 0 30px ${phase.glow.replace('0.3', '0.1')}`,
             color: phase.color,
@@ -120,24 +120,48 @@ function PhaseCard({ phase, index }: { phase: typeof phases[0]; index: number })
             style={{ border: `1px solid ${phase.color}` }}
           />
         </motion.div>
-        {/* Connecting line (not on last) */}
-        {index < phases.length - 1 && (
-          <motion.div
-            initial={{ scaleY: 0 }}
-            animate={inView ? { scaleY: 1 } : {}}
-            transition={{ duration: 0.6, delay: index * 0.1 + 0.4 }}
-            className="w-[2px] h-16 md:h-24 origin-top"
-            style={{
-              background: `linear-gradient(to bottom, ${phase.color}, ${phases[index + 1].color})`,
-              opacity: 0.4,
-            }}
-          />
-        )}
       </div>
 
       {/* Spacer for alternating layout */}
       <div className="flex-1 hidden md:block" />
     </motion.div>
+  );
+}
+
+function ScrollLine() {
+  const lineRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: lineRef,
+    offset: ['start 80%', 'end 20%'],
+  });
+
+  const scaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
+
+  return (
+    <div
+      ref={lineRef}
+      className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] z-0"
+    >
+      {/* Dim background track */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: 'linear-gradient(to bottom, #FFB347, #00E5FF, #7B2FBE, #1E90FF)',
+          opacity: 0.1,
+        }}
+      />
+      {/* Animated fill that grows on scroll */}
+      <motion.div
+        className="absolute top-0 left-0 w-full origin-top"
+        style={{
+          scaleY,
+          height: '100%',
+          background: 'linear-gradient(to bottom, #FFB347, #00E5FF, #7B2FBE, #1E90FF)',
+          opacity: 0.5,
+          boxShadow: '0 0 8px rgba(0,229,255,0.3)',
+        }}
+      />
+    </div>
   );
 }
 
@@ -188,8 +212,10 @@ export default function JourneySection() {
           </motion.h2>
         </div>
 
-        {/* Phase cards */}
-        <div className="flex flex-col gap-2 items-center">
+        {/* Phase cards with scroll-animated timeline */}
+        <div className="relative flex flex-col gap-16 items-center">
+          <ScrollLine />
+
           {phases.map((phase, i) => (
             <PhaseCard key={phase.id} phase={phase} index={i} />
           ))}

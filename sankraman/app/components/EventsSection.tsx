@@ -220,16 +220,11 @@ export default function EventsSection() {
             <button
               key={f}
               onClick={() => setActiveFilter(f)}
-              className={`min-w-[110px] px-5 py-2 rounded-full text-sm font-semibold tracking-wider transition-all duration-300 ${
+              className={`min-w-[110px] px-5 py-2.5 rounded-full text-sm font-semibold tracking-wider transition-all duration-300 ${
                 activeFilter === f
-                  ? 'text-[#020008]'
+                  ? 'bg-[#E8E8F0] text-[#020008]'
                   : 'glass-card text-white/50 hover:text-white/80'
               }`}
-              style={
-                activeFilter === f
-                  ? { background: 'linear-gradient(135deg, #00E5FF, #7B2FBE)' }
-                  : {}
-              }
             >
               {f}
             </button>

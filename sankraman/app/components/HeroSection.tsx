@@ -102,7 +102,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="flex items-center gap-2 glass-card px-4 py-2 rounded-full mb-8 text-xs font-semibold tracking-[0.25em] uppercase"
+          className="flex items-center gap-2 glass-card px-4 py-2 rounded-full mb-10 text-xs font-semibold tracking-[0.25em] uppercase"
         >
           <span className="text-[#00E5FF]">IEEE</span>
           <span className="text-white/30">×</span>
@@ -116,13 +116,13 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.35 }}
-          className="text-white/40 text-xs tracking-[0.45em] uppercase font-light mb-3"
+          className="text-white/40 text-xs tracking-[0.45em] uppercase font-light mb-5"
         >
           Presents
         </motion.p>
 
         {/* PRAKALP 4.0 — chrome metallic */}
-        <h1 className="font-black leading-none tracking-tight mb-2 hero-title"
+        <h1 className="font-black leading-none tracking-tight mb-6 hero-title"
           style={{ fontSize: 'clamp(3.5rem, 14vw, 10rem)' }}
         >
           <LetterReveal letters={LETTERS_PRAKALP} delay={0.4} className="chrome-text" />
@@ -130,7 +130,7 @@ export default function HeroSection() {
 
         {/* SANKRAMAN — neon glitch */}
         <div
-          className="glitch-container font-black tracking-[0.15em] leading-none mb-6"
+          className="glitch-container font-black tracking-[0.15em] leading-none mb-10"
           data-text="SANKRAMAN"
           style={{ fontSize: 'clamp(1.5rem, 6vw, 4rem)' }}
         >
@@ -142,7 +142,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.8 }}
-          className="text-[#B388FF]/80 font-light tracking-[0.2em] uppercase text-sm md:text-base mb-2"
+          className="text-white font-light tracking-[0.2em] uppercase text-sm md:text-base mb-4"
         >
           From Concept to Change
         </motion.p>
@@ -151,7 +151,7 @@ export default function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 2.1 }}
-          className="text-white/40 text-sm tracking-widest max-w-md"
+          className="text-white text-sm tracking-widest max-w-md"
         >
           Transition from Challenges to Solutions
         </motion.p>
@@ -161,15 +161,13 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 2.4 }}
-          className="flex flex-col sm:flex-row gap-4 mt-8"
+          className="flex flex-col sm:flex-row gap-6 mt-12"
         >
-          <button className="relative h-12 px-9 rounded-full font-bold text-sm text-[#020008] overflow-hidden group flex items-center justify-center">
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#00E5FF] via-[#1E90FF] to-[#7B2FBE]" />
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#00E5FF] via-[#1E90FF] to-[#7B2FBE] blur-lg opacity-0 group-hover:opacity-70 transition-opacity duration-300" />
-            <span className="relative z-10 tracking-wider">Register Now</span>
+          <button className="px-9 py-3 rounded-full font-bold text-sm bg-[#E8E8F0] text-[#020008] hover:bg-[#E8E8F0]/85 transition-colors duration-300 tracking-wider">
+            Register Now
           </button>
 
-          <button className="h-12 px-9 rounded-full font-bold text-sm text-[#00E5FF] border border-[#00E5FF]/30 hover:border-[#00E5FF]/70 hover:bg-[#00E5FF]/5 transition-all duration-300 tracking-wider flex items-center justify-center">
+          <button className="px-9 py-3 rounded-full font-bold text-sm text-[#E8E8F0] border border-[#E8E8F0]/25 hover:border-[#E8E8F0]/50 hover:bg-[#E8E8F0]/5 transition-all duration-300 tracking-wider">
             Learn More
           </button>
         </motion.div>

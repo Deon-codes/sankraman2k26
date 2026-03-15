@@ -38,7 +38,7 @@ export default function ContactSection() {
             Join the Transition
           </h2>
 
-          <p className="text-white/50 text-base md:text-lg leading-relaxed mb-10 max-w-xl mx-auto">
+          <p className="text-white text-base md:text-lg leading-relaxed mb-10 max-w-xl mx-auto">
             Be part of Sankraman — engineer the change. Register now to participate in events,
             workshops, and experience the full journey from concept to impact.
           </p>
@@ -47,17 +47,15 @@ export default function ContactSection() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
-              className="relative h-12 px-9 rounded-full font-bold text-sm text-[#020008] overflow-hidden group flex items-center justify-center"
+              className="px-9 py-3 rounded-full font-bold text-sm bg-[#E8E8F0] text-[#020008] hover:bg-[#E8E8F0]/85 transition-colors duration-300 tracking-wider"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-[#00E5FF] via-[#1E90FF] to-[#7B2FBE]" />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#00E5FF] via-[#1E90FF] to-[#7B2FBE] blur-lg opacity-0 group-hover:opacity-60 transition-opacity duration-300" />
-              <span className="relative z-10 tracking-wider">Register for PRAKALP</span>
+              Register for PRAKALP
             </motion.button>
 
             <motion.button
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className="h-12 px-9 rounded-full font-bold text-sm text-[#00E5FF] border border-[#00E5FF]/30 hover:border-[#00E5FF]/70 hover:bg-[#00E5FF]/5 transition-all duration-300 tracking-wider flex items-center justify-center"
+              className="px-9 py-3 rounded-full font-bold text-sm text-[#E8E8F0] border border-[#E8E8F0]/25 hover:border-[#E8E8F0]/50 hover:bg-[#E8E8F0]/5 transition-all duration-300 tracking-wider"
             >
               Contact Us
             </motion.button>
