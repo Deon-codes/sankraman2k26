@@ -8,7 +8,7 @@ export default function ContactSection() {
   const inView = useInView(ref, { once: true, margin: '-60px' });
 
   return (
-    <section id="contact" className="relative w-full flex flex-col items-center justify-center py-24 px-6 overflow-hidden" ref={ref}>
+    <section id="contact" className="section-base overflow-hidden" ref={ref}>
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -38,7 +38,7 @@ export default function ContactSection() {
             Join the Transition
           </h2>
 
-          <p className="text-white/50 text-base md:text-lg leading-relaxed mb-10 max-w-xl mx-auto">
+          <p className="text-white text-base md:text-lg leading-relaxed mb-10 max-w-xl mx-auto">
             Be part of Sankraman — engineer the change. Register now to participate in events,
             workshops, and experience the full journey from concept to impact.
           </p>
@@ -47,17 +47,15 @@ export default function ContactSection() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
-              className="relative min-h-[52px] px-10 py-4 rounded-full font-bold text-base text-[#020008] overflow-hidden group"
+              className="px-9 py-3 rounded-full font-bold text-sm bg-[#E8E8F0] text-[#020008] hover:bg-[#E8E8F0]/85 transition-colors duration-300 tracking-wider"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-[#00E5FF] via-[#1E90FF] to-[#7B2FBE]" />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#00E5FF] via-[#1E90FF] to-[#7B2FBE] blur-lg opacity-0 group-hover:opacity-60 transition-opacity" />
-              <span className="relative z-10 tracking-wider">Register for PRAKALP</span>
+              Register for PRAKALP
             </motion.button>
 
             <motion.button
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className="px-10 py-4 rounded-full font-bold text-base text-[#B388FF] border border-[#B388FF]/30 hover:border-[#B388FF]/70 hover:bg-[#B388FF]/5 transition-all tracking-wider"
+              className="px-9 py-3 rounded-full font-bold text-sm text-[#E8E8F0] border border-[#E8E8F0]/25 hover:border-[#E8E8F0]/50 hover:bg-[#E8E8F0]/5 transition-all duration-300 tracking-wider"
             >
               Contact Us
             </motion.button>
@@ -66,12 +64,12 @@ export default function ContactSection() {
           <div className="divider mb-10" />
 
           {/* Social / contact links */}
-          <div className="flex flex-wrap justify-center gap-6 text-sm text-white/40">
+          <div className="flex flex-wrap justify-center gap-8 text-sm text-white/40">
             {['Instagram', 'LinkedIn', 'Email'].map((platform) => (
               <a
                 key={platform}
                 href="#"
-                className="hover:text-[#00E5FF] transition-colors duration-200 tracking-wider"
+                className="hover:text-[#00E5FF] transition-colors duration-200 tracking-wider py-2"
               >
                 {platform}
               </a>

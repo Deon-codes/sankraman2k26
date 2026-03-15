@@ -1,36 +1,144 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PRAKALP 4.0 — Sankraman
+
+> **Sankraman** · *Transition from Challenges to Solutions*
+
+The official landing website for **PRAKALP 4.0**, the annual technical fest organized by **IEEE × WiE × Project Cell** at Fr. Conceicao Rodrigues College of Engineering (CRCE), Mumbai.
+
+---
+
+## About
+
+PRAKALP 4.0's theme — *Sankraman* (Sanskrit: transition) — represents the purposeful journey from real-world engineering challenges to practical, impactful solutions. The website reflects this through a cinematic, scroll-driven experience with a live 3D WebGL background, immersive animations, and a dark space aesthetic.
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 16 (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS v4 |
+| Component Animations | Framer Motion |
+| Scroll Animations | GSAP + ScrollTrigger |
+| 3D / WebGL | Three.js · `@react-three/fiber` · `@react-three/drei` |
+| Smooth Scroll | Lenis |
+
+---
+
+## Project Structure
+
+```
+sankraman/
+├── app/
+│   ├── components/
+│   │   ├── AboutSection.tsx       # Theme explainer — Challenges vs Solutions
+│   │   ├── ContactSection.tsx     # Registration CTA + social links
+│   │   ├── CouncilsSection.tsx    # IEEE / WiE / Project Cell cards
+│   │   ├── Cursor.tsx             # Spring-physics custom cursor with trails
+│   │   ├── EventsSection.tsx      # Event listing with category filter
+│   │   ├── Experience.tsx         # Three.js WebGL background (vortex + shaders)
+│   │   ├── Footer.tsx             # Brand, council credits, links
+│   │   ├── HeroSection.tsx        # Letter-reveal title, CTA, energy streaks
+│   │   ├── JourneySection.tsx     # Ideation → Design → Development → Impact timeline
+│   │   ├── Navbar.tsx             # Scroll-aware nav with mobile drawer
+│   │   └── SmoothScroll.tsx       # Lenis wrapper
+│   ├── globals.css                # Tailwind theme tokens, utility classes, animations
+│   ├── layout.tsx                 # Root layout + metadata
+│   └── page.tsx                   # Page composition + GSAP scroll orchestration
+├── public/
+├── next.config.ts
+├── postcss.config.mjs
+├── tailwind.config (via globals.css @theme)
+└── tsconfig.json
+```
+
+---
 
 ## Getting Started
 
-First, run the development server:
+**Prerequisites:** Node.js 18+
 
 ```bash
+# Install dependencies
+npm install
+
+# Start the dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the site.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Production build
+npm run build
+npm run start
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Lint
+npm run lint
+```
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Page Sections
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Section | ID | Description |
+|---|---|---|
+| Hero | `#hero` | Animated title reveal, energy streaks, register CTA |
+| About | `#about` | Sankraman theme — Challenges vs Solutions split |
+| Journey | `#journey` | Four-phase event timeline: Ideation → Impact |
+| Councils | `#councils` | Organising bodies: IEEE, WiE, Project Cell |
+| Events | `#events` | Event cards with Technical / Non-Technical filter |
+| Contact | `#contact` | Registration CTA and social links |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+> **Note:** `EventsSection` is built and ready — wire it into `page.tsx` when event details are finalised.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## WebGL Background
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`Experience.tsx` runs a full-screen Three.js canvas (SSR-disabled via `dynamic` import). It includes:
+
+- **VortexParticles** — 3,500 custom GLSL shader particles in a scroll-reactive spiral vortex
+- **EnergyCore** — Central pulsing orb with a Fresnel-glow fragment shader
+- **NeuralNet** — 35-node random graph with proximity-based edge connections
+- **HolographicRings** — Three rotating torus rings
+- **CameraController** — Scroll + mouse driven cinematic camera movement
+
+---
+
+## Design Tokens
+
+Key CSS custom properties defined in `globals.css`:
+
+```css
+--color-void:             #020008   /* page background */
+--color-neon-cyan:        #00E5FF   /* primary accent */
+--color-electric-purple:  #7B2FBE   /* secondary accent */
+--color-electric-blue:    #1E90FF   /* tertiary accent */
+--color-lavender:         #B388FF   /* body text / subtle */
+```
+
+Utility classes: `.glass-card`, `.chrome-text`, `.neon-gradient-text`, `.glow-cyan`, `.section-base`, `.divider`, `.glitch-container`
+
+---
+
+## Deployment
+
+The easiest way to deploy is [Vercel](https://vercel.com):
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
+
+No environment variables are required for the base site.
+
+---
+
+## Organised By
+
+**IEEE CRCE** × **WiE CRCE** × **Project Cell CRCE**
+
+Fr. Conceicao Rodrigues College of Engineering, Mumbai
+
+---
+
+*© 2025 IEEE × WiE × Project Cell, CRCE. All rights reserved.*

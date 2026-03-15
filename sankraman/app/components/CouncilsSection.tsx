@@ -196,7 +196,7 @@ export default function CouncilsSection() {
             }}
           />
           <div className="relative z-10">
-            <div className="flex justify-center items-center gap-4 md:gap-8 mb-6 flex-wrap">
+            <div className="flex justify-center items-center gap-4 md:gap-8 mb-4 flex-wrap">
               {councils.map((c, i) => (
                 <div key={c.shortName} className="flex items-center gap-4">
                   <span

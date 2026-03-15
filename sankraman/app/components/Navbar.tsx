@@ -36,68 +36,81 @@ export default function Navbar() {
         transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
           scrolled
-            ? 'py-3 glass-card border-b border-white/10'
+            ? 'py-3'
             : 'py-5 bg-transparent'
         }`}
+        style={scrolled ? {
+          background: 'rgba(2, 0, 8, 0.4)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          boxShadow: '0 4px 30px rgba(0, 0, 0, 0.3)',
+        } : undefined}
       >
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+        <div className="w-full px-10 flex items-center justify-between">
           {/* Logo */}
           <a
             href="#hero"
             onClick={(e) => handleNavClick(e, '#hero')}
-            className="flex items-center group"
+            className="flex items-center group shrink-0"
           >
             <div>
               <div className="font-black text-lg tracking-widest text-white leading-none">PRAKALP 4.0</div>
-              <div className="text-[10px] tracking-[0.35em] text-[#00E5FF] uppercase">Sankraman</div>
+              <div className="text-[11px] tracking-[0.35em] text-[#00E5FF] uppercase mt-0.5">Sankraman</div>
             </div>
           </a>
 
-          {/* Desktop nav links */}
-          <div className="hidden md:flex items-center gap-1 glass-card px-4 py-2 rounded-full">
+          {/* Desktop nav links — centered */}
+          <div className="hidden md:flex items-center gap-2 px-6 py-2.5 rounded-full absolute left-1/2 -translate-x-1/2" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)' }}>
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className="px-4 py-1.5 text-sm font-medium text-[#B388FF]/80 hover:text-[#00E5FF] transition-colors duration-200 rounded-full hover:bg-white/5"
+                className="px-5 py-2 text-sm font-medium text-[#B388FF]/80 hover:text-[#00E5FF] transition-all duration-200 rounded-full hover:bg-white/5"
               >
                 {link.label}
               </a>
             ))}
           </div>
 
-          {/* CTA */}
-          <div className="hidden md:flex items-center gap-3">
+          {/* CTA — far right */}
+          <div className="hidden md:flex items-center shrink-0">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
-              className="relative min-h-[38px] px-6 py-2.5 rounded-full font-bold text-sm text-[#020008] overflow-hidden group"
+              className="px-8 py-2.5 rounded-full font-semibold text-sm bg-white text-[#020008] hover:bg-white/90 transition-colors duration-300 tracking-wide"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-[#00E5FF] via-[#7B2FBE] to-[#1E90FF] opacity-90 group-hover:opacity-100 transition-opacity" />
-              <span className="relative z-10">Register Now</span>
+              Register Now
             </motion.button>
           </div>
 
-          {/* Mobile menu toggle */}
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden flex flex-col gap-1.5 p-2 z-10"
-            aria-label="Toggle menu"
-          >
-            <motion.span
-              animate={{ rotate: mobileOpen ? 45 : 0, y: mobileOpen ? 7 : 0 }}
-              className="block w-6 h-0.5 bg-[#00E5FF] rounded"
-            />
-            <motion.span
-              animate={{ opacity: mobileOpen ? 0 : 1 }}
-              className="block w-6 h-0.5 bg-[#B388FF] rounded"
-            />
-            <motion.span
-              animate={{ rotate: mobileOpen ? -45 : 0, y: mobileOpen ? -7 : 0 }}
-              className="block w-6 h-0.5 bg-[#00E5FF] rounded"
-            />
-          </button>
+          {/* Mobile CTA + menu toggle */}
+          <div className="md:hidden flex items-center gap-3">
+            <motion.button
+              whileTap={{ scale: 0.95 }}
+              className="px-4 py-2 rounded-full font-bold text-xs bg-[#E8E8F0] text-[#020008] tracking-wider"
+            >
+              Register
+            </motion.button>
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="flex flex-col gap-1.5 p-2 z-10"
+              aria-label="Toggle menu"
+            >
+              <motion.span
+                animate={{ rotate: mobileOpen ? 45 : 0, y: mobileOpen ? 7 : 0 }}
+                className="block w-6 h-0.5 bg-[#00E5FF] rounded"
+              />
+              <motion.span
+                animate={{ opacity: mobileOpen ? 0 : 1 }}
+                className="block w-6 h-0.5 bg-[#B388FF] rounded"
+              />
+              <motion.span
+                animate={{ rotate: mobileOpen ? -45 : 0, y: mobileOpen ? -7 : 0 }}
+                className="block w-6 h-0.5 bg-[#00E5FF] rounded"
+              />
+            </button>
+          </div>
         </div>
       </motion.nav>
 
@@ -130,7 +143,7 @@ export default function Navbar() {
             initial={{ x: 40, opacity: 0 }}
             animate={{ x: mobileOpen ? 0 : 40, opacity: mobileOpen ? 1 : 0 }}
             transition={{ duration: 0.3, delay: navLinks.length * 0.06 }}
-            className="mt-4 px-6 py-3 rounded-full font-bold text-white bg-gradient-to-r from-[#00E5FF] via-[#7B2FBE] to-[#1E90FF]"
+            className="mt-4 px-6 py-3 rounded-full font-bold bg-[#E8E8F0] text-[#020008] tracking-wider"
           >
             Register Now
           </motion.button>
