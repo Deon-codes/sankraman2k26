@@ -7,6 +7,7 @@ import AboutSection from "@/components/sections/AboutSection";
 import JourneySection from "@/components/sections/JourneySection";
 import CouncilsSection from "@/components/sections/CouncilsSection";
 import ContactSection from "@/components/sections/ContactSection";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -37,6 +38,9 @@ export default function Home() {
 
         {/* Contact Section */}
         <ContactSection />
+
+        {/* Footer */}
+        <Footer />
         
       </div>
 
