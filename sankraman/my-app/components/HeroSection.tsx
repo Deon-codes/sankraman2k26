@@ -105,6 +105,14 @@ export default function HeroSection() {
         <div className={`fixed inset-0 bg-black/95 backdrop-blur-xl z-[55] flex flex-col items-center justify-center transition-all duration-500 ease-in-out pointer-events-auto ${
           isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
         }`}>
+          {/* Close Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="absolute top-8 right-8 text-[#ffedd5] hover:text-[#ff6600] transition-colors duration-200 text-3xl leading-none"
+            aria-label="Close menu"
+          >
+            ✕
+          </button>
           <div className="flex flex-col gap-10 text-center text-lg font-black tracking-[0.4em] uppercase text-[#ffedd5]">
             <a href="#about" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#ff6600] transition-colors">ABOUT</a>
             <a href="#journey" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#ff6600] transition-colors">JOURNEY</a>

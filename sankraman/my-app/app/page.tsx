@@ -16,7 +16,7 @@ export default function Home() {
       <HeroSection />
 
       {/* Content Sections - Normal document flow below hero */}
-      <div className="relative z-20">
+      <div className="relative z-20 overflow-x-hidden w-full">
         
         {/* About Section */}
         <AboutSection />
