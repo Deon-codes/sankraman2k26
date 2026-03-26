@@ -126,7 +126,7 @@ export default function ContactSection() {
                 </div>
               </div>
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-[#ff6600]/20 pb-2">
-                <span>Pranav Koradiya <span className="text-[#ff6600] text-[0.5rem] sm:text-[0.65rem] ml-1">PCELL PR</span></span>
+                <span>Pranav Koradiya <span className="text-[#ff6600] text-[0.5rem] sm:text-[0.65rem] ml-1">Project Cell Co-lead</span></span>
                 <div className="flex items-center gap-3 mt-1 sm:mt-0 ml-auto">
                   <span className="font-mono text-[0.7rem] sm:text-xs">+91 97692 04570</span>
                   <a href="https://wa.me/919769204570" target="_blank" rel="noopener noreferrer" className="text-[#ff6600] hover:text-[#ffaa00] transition-colors flex-shrink-0">
