@@ -28,7 +28,7 @@ export default function JourneySection() {
 
       {/* Dark Glassmorphism Background */}
       <div className="absolute inset-0 bg-black/50 backdrop-blur-lg" />
-      <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/40 to-black/70" />
+      <div className="absolute inset-0 bg-linear-to-br from-black/70 via-black/40 to-black/70" />
 
       <motion.div
         initial={{ opacity: 0, y: 50 }}
@@ -54,19 +54,19 @@ export default function JourneySection() {
         {/* Timeline */}
         <div ref={containerRef} className="relative">
           {/* Central line background */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-[4px] bg-[#ff6600]/20 -translate-x-1/2 rounded-full" />
+          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-1 bg-[#ff6600]/20 -translate-x-1/2 rounded-full" />
           
           {/* Active animated progress line */}
           <motion.div 
             style={{ scaleY }}
-            className="absolute left-1/2 top-0 bottom-0 w-[4px] bg-[#ff6600] -translate-x-1/2 origin-top drop-shadow-[0_0_20px_rgba(255,102,0,1)] rounded-full z-0" 
+            className="absolute left-6 md:left-1/2 top-0 bottom-0 w-1 bg-[#ff6600] -translate-x-1/2 origin-top drop-shadow-[0_0_20px_rgba(255,102,0,1)] rounded-full z-0" 
           />
 
           {/* Timeline Events */}
           <div className="space-y-16">
             {timelineEvents.map((event, index) => (
-              <div key={index} className={`flex items-center ${index % 2 === 0 ? '' : 'flex-row-reverse'}`}>
-                <div className={`w-1/2 ${index % 2 === 0 ? 'pr-12 text-right' : 'pl-12'}`}>
+              <div key={index} className={`relative flex items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+                <div className={`w-full pl-14 md:w-1/2 ${index % 2 === 0 ? 'md:pr-12 md:pl-0 md:text-right' : 'md:pl-12'}`}>
                   {/* Event Card with Glassmorphism */}
                   <div className="p-6 rounded-lg bg-black/30 backdrop-blur-sm border border-[#ff6600]/20 hover:border-[#ff6600]/50 transition-all duration-500">
                     <div className="text-xs font-black tracking-[0.3em] text-[#ff6600] uppercase mb-2">
@@ -85,7 +85,7 @@ export default function JourneySection() {
                 </div>
 
                 {/* Central dot */}
-                <div className="absolute left-1/2 w-4 h-4 bg-[#ff6600] rounded-full -translate-x-1/2 border-2 border-black drop-shadow-[0_0_15px_rgba(255,102,0,0.9)] z-10" />
+                <div className="absolute left-6 md:left-1/2 w-4 h-4 bg-[#ff6600] rounded-full -translate-x-1/2 border-2 border-black drop-shadow-[0_0_15px_rgba(255,102,0,0.9)] z-10" />
               </div>
             ))}
           </div>
@@ -93,7 +93,7 @@ export default function JourneySection() {
 
       </motion.div>
 
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/60 pointer-events-none" />
+      <div className="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-black/60 pointer-events-none" />
     </div>
   );
 }
