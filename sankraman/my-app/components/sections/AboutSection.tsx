@@ -1,3 +1,7 @@
+"use client";
+
+import { motion } from "framer-motion";
+
 export default function AboutSection() {
   return (
     <div id="about" className="relative min-h-screen flex items-center justify-center py-20">
@@ -7,7 +11,13 @@ export default function AboutSection() {
       <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/30 to-black/60" />
       
       {/* Content */}
-      <div className="relative z-10 max-w-6xl mx-auto px-8 md:px-12 text-center">
+      <motion.div 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="relative z-10 max-w-6xl mx-auto px-8 md:px-12 text-center"
+      >
         {/* Section Label - Movie Poster Style */}
         <div className="text-[0.55rem] md:text-xs font-black tracking-[0.4em] text-[#ff6600] uppercase mb-8 mix-blend-screen opacity-90">
           ABOUT THE EVENT
@@ -54,7 +64,7 @@ export default function AboutSection() {
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
 
       {/* Additional overlay for depth */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30 pointer-events-none" />

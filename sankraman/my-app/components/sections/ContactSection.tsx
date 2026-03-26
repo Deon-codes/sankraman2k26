@@ -1,3 +1,7 @@
+"use client";
+
+import { motion } from "framer-motion";
+
 export default function ContactSection() {
   return (
     <div id="contact" className="relative min-h-screen flex items-center justify-center py-20">
@@ -6,7 +10,13 @@ export default function ContactSection() {
       <div className="absolute inset-0 bg-black/55 backdrop-blur-2xl" />
       <div className="absolute inset-0 bg-gradient-to-br from-black/75 via-black/45 to-black/75" />
       
-      <div className="relative z-10 max-w-4xl mx-auto px-8 md:px-12 text-center">
+      <motion.div 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="relative z-10 max-w-4xl mx-auto px-8 md:px-12 text-center"
+      >
         {/* Section Header */}
         <div className="mb-16">
           <div className="text-[0.55rem] md:text-xs font-black tracking-[0.4em] text-[#ff6600] uppercase mb-8 mix-blend-screen opacity-90">
@@ -66,7 +76,7 @@ export default function ContactSection() {
           </div>
         </div>
 
-      </div>
+      </motion.div>
 
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/60 pointer-events-none" />
     </div>

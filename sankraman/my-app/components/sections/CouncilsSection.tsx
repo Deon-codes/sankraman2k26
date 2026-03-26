@@ -1,3 +1,7 @@
+"use client";
+
+import { motion } from "framer-motion";
+
 export default function CouncilsSection() {
   const councils = [
     { name: "WIE", fullName: "Women in Engineering", description: "Empowering the next generation of female engineers" },
@@ -12,7 +16,13 @@ export default function CouncilsSection() {
       <div className="absolute inset-0 bg-black/45 backdrop-blur-xl" />
       <div className="absolute inset-0 bg-gradient-to-br from-black/65 via-black/35 to-black/65" />
       
-      <div className="relative z-10 max-w-6xl mx-auto px-8 md:px-12">
+      <motion.div 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="relative z-10 max-w-6xl mx-auto px-8 md:px-12"
+      >
         {/* Section Header */}
         <div className="text-center mb-16">
           <div className="text-[0.55rem] md:text-xs font-black tracking-[0.4em] text-[#ff6600] uppercase mb-8 mix-blend-screen opacity-90">
@@ -67,7 +77,7 @@ export default function CouncilsSection() {
           ))}
         </div>
 
-      </div>
+      </motion.div>
 
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/50 pointer-events-none" />
     </div>
