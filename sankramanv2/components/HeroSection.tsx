@@ -143,8 +143,12 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              style={{ fontFamily: "'Dune Rise', sans-serif" }}
-              className="text-[7vw] md:text-[5vw] lg:text-[6vw] tracking-widest text-[#ffedd5] drop-shadow-[0_0_30px_rgba(255,166,0,0.8)] mb-2 leading-tight"
+              style={{ 
+                fontFamily: "'Dune Rise', sans-serif",
+                WebkitTextStroke: '1px rgba(255,102,0,0.3)',
+                textShadow: '0 0 40px rgba(255,166,0,1), 0 0 80px rgba(255,102,0,0.8), 0 0 120px rgba(255,60,0,0.6), 2px 2px 4px rgba(0,0,0,0.8)'
+              }}
+              className="text-[8vw] md:text-[6vw] lg:text-[7vw] tracking-widest text-[#ffedd5] mb-2 leading-tight"
             >
               SANKRAMAN
             </motion.h1>

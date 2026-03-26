@@ -25,7 +25,7 @@ export default function Footer() {
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           <h3
-            className="text-3xl md:text-4xl tracking-widest text-[#ffedd5] mb-4 drop-shadow-[0_0_20px_rgba(255,166,0,0.6)]"
+            className="text-2xl sm:text-3xl md:text-4xl tracking-wider md:tracking-widest text-[#ffedd5] mb-4 drop-shadow-[0_0_20px_rgba(255,166,0,0.6)]"
             style={{ fontFamily: "'Dune Rise', sans-serif" }}
           >
             SANKRAMAN

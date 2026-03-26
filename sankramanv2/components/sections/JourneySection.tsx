@@ -53,38 +53,38 @@ export default function JourneySection() {
         {/* Timeline */}
         <div ref={containerRef} className="relative">
           {/* Central line background */}
-          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-1 bg-[#ff6600]/20 -translate-x-1/2 rounded-full" />
+          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 md:w-1 bg-[#ff6600]/20 -translate-x-1/2 rounded-full" />
           
           {/* Active animated progress line */}
           <motion.div 
             style={{ scaleY }}
-            className="absolute left-6 md:left-1/2 top-0 bottom-0 w-1 bg-[#ff6600] -translate-x-1/2 origin-top drop-shadow-[0_0_20px_rgba(255,102,0,1)] rounded-full z-0" 
+            className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 md:w-1 bg-[#ff6600] -translate-x-1/2 origin-top drop-shadow-[0_0_20px_rgba(255,102,0,1)] rounded-full z-0" 
           />
 
           {/* Timeline Events */}
-          <div className="space-y-16">
+          <div className="space-y-12 md:space-y-16">
             {timelineEvents.map((event, index) => (
               <div key={index} className={`relative flex items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
-                <div className={`w-full pl-14 md:w-1/2 ${index % 2 === 0 ? 'md:pr-12 md:pl-0 md:text-right' : 'md:pl-12'}`}>
+                <div className={`w-full pl-10 md:w-1/2 ${index % 2 === 0 ? 'md:pr-12 md:pl-0 md:text-right' : 'md:pl-12'}`}>
                   {/* Event Card with Glassmorphism */}
-                  <div className="p-6 rounded-xl bg-black/30 backdrop-blur-sm border border-[#ff6600]/20 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_15px_30px_-10px_rgba(255,102,0,0.4)] transition-all duration-500">
+                  <div className="p-4 md:p-6 rounded-xl bg-black/30 backdrop-blur-sm border border-[#ff6600]/20 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_15px_30px_-10px_rgba(255,102,0,0.4)] transition-all duration-500">
                     <div className="text-xs font-black tracking-[0.3em] text-[#ff6600] uppercase mb-2">
                       {event.time}
                     </div>
                     <h3
-                      className="text-xl md:text-2xl text-[#ffedd5] mb-2 tracking-wider drop-shadow-sm"
+                      className="text-lg md:text-xl lg:text-2xl text-[#ffedd5] mb-2 tracking-wider drop-shadow-sm"
                       style={{ fontFamily: "'Dune Rise', sans-serif" }}
                     >
                       {event.title}
                     </h3>
-                    <p className="text-[#ffedd5]/90 tracking-wide drop-shadow-sm">
+                    <p className="text-sm md:text-base text-[#ffedd5]/90 tracking-wide drop-shadow-sm leading-relaxed">
                       {event.desc}
                     </p>
                   </div>
                 </div>
 
                 {/* Central dot */}
-                <div className="absolute left-6 md:left-1/2 w-4 h-4 bg-[#ff6600] rounded-full -translate-x-1/2 border-2 border-black drop-shadow-[0_0_15px_rgba(255,102,0,0.9)] z-10" />
+                <div className="absolute left-4 md:left-1/2 w-3 h-3 md:w-4 md:h-4 bg-[#ff6600] rounded-full -translate-x-1/2 border-2 border-black drop-shadow-[0_0_15px_rgba(255,102,0,0.9)] z-10" />
               </div>
             ))}
           </div>
