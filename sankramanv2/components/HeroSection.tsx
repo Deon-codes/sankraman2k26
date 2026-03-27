@@ -23,17 +23,17 @@ export default function HeroSection() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // The HeroSection takes 300vh to finish leaving the screen.
-      // The next component (AboutSection) hits the top of the screen at 300vh.
-      // Eclipsing the navbar completely around 2.95 innerHeight.
-      setIsScrolled(window.scrollY >= window.innerHeight * 2.95);
+      // The HeroSection takes 200vh to finish leaving the screen.
+      // The next component (AboutSection) hits the top of the screen at 200vh.
+      // Eclipsing the navbar completely around 1.95 innerHeight.
+      setIsScrolled(window.scrollY >= window.innerHeight * 1.5);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <div ref={containerRef} id="home" className="relative min-h-[300vh]">
+    <div ref={containerRef} id="home" className="relative min-h-[200vh]">
       {/* Sticky inner container */}
       <motion.div style={{ opacity: heroOpacity }} className="sticky top-0 h-screen w-full">
 
