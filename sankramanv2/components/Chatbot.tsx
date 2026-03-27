@@ -210,6 +210,14 @@ const RULES: { keywords: string[]; response: BotResponse }[] = [
     },
   },
 
+  /* ── Website credits ───────────────────────────────────────────────────── */
+  {
+    keywords: ["who made", "who built", "who designed", "who created", "website team", "web team", "developer", "designer", "credit", "made this", "built this", "created this"],
+    response: {
+      text: "The team that built this website consisted of members from Project Cell CRCE:\n\n💻 Manvith Karkera\n   Development, Design, Effects & Animations\n\n💻 Deon Raj\n   Development & Content\n\n💻 David Porathur\n   Chatbot & Animations\n\n🎨 Yash Masaye\n   UI & Design\n\nSpecial thanks to WIE and IEEE for organising and supporting Prakalp 4.0! 🙌",
+    },
+  },
+
   /* ── Pleasantries ───────────────────────────────────────────────────────── */
   {
     keywords: ["thank", "thanks", "ty", "great", "awesome", "cool", "helpful"],
