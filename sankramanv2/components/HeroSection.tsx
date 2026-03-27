@@ -12,10 +12,10 @@ export default function HeroSection() {
     offset: ["start start", "end end"]
   });
 
-  // Calculate parallax offsets. Ending at 0.7 gives a 30% scroll "pause" for the user to enjoy the final frame before the next section appears!
-  const textY = useTransform(scrollYProgress, [0, 0.7], ["100vh", "-15vh"]);
-  const textScale = useTransform(scrollYProgress, [0, 0.7], [0.8, 1]);
-  const textOpacity = useTransform(scrollYProgress, [0, 0.35, 0.7], [0, 1, 1]);
+  // Calculate parallax offsets. Ending at 0.4 gives a more responsive feel while still allowing a brief pause.
+  const textY = useTransform(scrollYProgress, [0, 0.2], ["100vh", "-15vh"]);
+  const textScale = useTransform(scrollYProgress, [0, 0.2], [0.8, 1]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.05, 0.2], [0, 1, 1]);
   const heroOpacity = useTransform(scrollYProgress, [0.8, 1], [1, 0]);
 
   const [isScrolled, setIsScrolled] = useState(false);
@@ -45,49 +45,49 @@ export default function HeroSection() {
         {/* Navbar */}
         <nav className={`absolute top-0 left-0 w-full z-50 px-8 py-8 md:px-12 flex items-center justify-center pointer-events-auto transition-all duration-300 ${isScrolled ? 'bg-black/60 backdrop-blur-md' : 'bg-transparent'
           }`}>
-            <div className={`w-full max-w-7xl flex justify-between items-center text-xs font-black tracking-[0.4em] uppercase transition-colors duration-300 ${isScrolled ? 'text-[#ffedd5]' : 'text-[#1a0a00]'
-              } ${!isScrolled && 'mix-blend-multiply opacity-90'}`}>
-              
-              {/* All Elements Equally Spaced */}
-              <div className="hidden md:flex w-full justify-between items-center">
-                <a href="#home" className="relative group pb-0.5 inline-block flex-1 text-center">
-                  <span className="transition-opacity group-hover:opacity-80">PRAKALP 4.0</span>
-                  <span className={`absolute bottom-0 left-1/2 w-0 h-[1.5px] -translate-x-1/2 transition-all duration-300 ease-out group-hover:w-full ${isScrolled ? 'bg-[#ffedd5]' : 'bg-[#1a0a00]'
-                    }`}></span>
-                </a>
-                
-                <a href="#about" className="relative group pb-0.5 inline-block flex-1 text-center">
-                  <span className="transition-opacity group-hover:opacity-80">ABOUT</span>
-                  <span className={`absolute bottom-0 left-1/2 w-0 h-[1.5px] -translate-x-1/2 transition-all duration-300 ease-out group-hover:w-full ${isScrolled ? 'bg-[#ffedd5]' : 'bg-[#1a0a00]'
-                    }`}></span>
-                </a>
-                
-                <a href="#journey" className="relative group pb-0.5 inline-block flex-1 text-center">
-                  <span className="transition-opacity group-hover:opacity-80">JOURNEY</span>
-                  <span className={`absolute bottom-0 left-1/2 w-0 h-[1.5px] -translate-x-1/2 transition-all duration-300 ease-out group-hover:w-full ${isScrolled ? 'bg-[#ffedd5]' : 'bg-[#1a0a00]'
-                    }`}></span>
-                </a>
-                
-                <a href="#councils" className="relative group pb-0.5 inline-block flex-1 text-center">
-                  <span className="transition-opacity group-hover:opacity-80">COUNCILS</span>
-                  <span className={`absolute bottom-0 left-1/2 w-0 h-[1.5px] -translate-x-1/2 transition-all duration-300 ease-out group-hover:w-full ${isScrolled ? 'bg-[#ffedd5]' : 'bg-[#1a0a00]'
-                    }`}></span>
-                </a>
-                
-                <a href="#contact" className="relative group pb-0.5 inline-block flex-1 text-center">
-                  <span className="transition-opacity group-hover:opacity-80">CONTACT</span>
-                  <span className={`absolute bottom-0 left-1/2 w-0 h-[1.5px] -translate-x-1/2 transition-all duration-300 ease-out group-hover:w-full ${isScrolled ? 'bg-[#ffedd5]' : 'bg-[#1a0a00]'
-                    }`}></span>
-                </a>
-                
-                <a href="https://unstop.com/p/prakalp-40-fr-conceicao-rodrigues-college-of-engineering-frcrce-bandra-1660364?utm_medium=Share&utm_source=chrqwgfb39910&utm_campaign=Online_coding_challenge" target="_blank" rel="noopener noreferrer" className="relative group pb-0.5 inline-block flex-1 text-center">
-                  <span className="transition-opacity group-hover:opacity-80">REGISTER NOW</span>
-                  <span className={`absolute bottom-0 left-0 w-full h-[1.5px] ${isScrolled ? 'bg-[#ffedd5]/30' : 'bg-[#1a0a00]/30'
-                    }`}></span>
-                  <span className={`absolute bottom-0 left-1/2 w-0 h-[1.5px] -translate-x-1/2 transition-all duration-300 ease-out group-hover:w-full ${isScrolled ? 'bg-[#ffedd5]' : 'bg-[#1a0a00]'
-                    }`}></span>
-                </a>
-              </div>
+          <div className={`w-full max-w-7xl flex justify-between items-center text-xs font-black tracking-[0.4em] uppercase transition-colors duration-300 ${isScrolled ? 'text-[#ffedd5]' : 'text-[#1a0a00]'
+            } ${!isScrolled && 'mix-blend-multiply opacity-90'}`}>
+
+            {/* All Elements Equally Spaced */}
+            <div className="hidden md:flex w-full justify-between items-center">
+              <a href="#home" className="relative group pb-0.5 inline-block flex-1 text-center">
+                <span className="transition-opacity group-hover:opacity-80">PRAKALP 4.0</span>
+                <span className={`absolute bottom-0 left-1/2 w-0 h-[1.5px] -translate-x-1/2 transition-all duration-300 ease-out group-hover:w-full ${isScrolled ? 'bg-[#ffedd5]' : 'bg-[#1a0a00]'
+                  }`}></span>
+              </a>
+
+              <a href="#about" className="relative group pb-0.5 inline-block flex-1 text-center">
+                <span className="transition-opacity group-hover:opacity-80">ABOUT</span>
+                <span className={`absolute bottom-0 left-1/2 w-0 h-[1.5px] -translate-x-1/2 transition-all duration-300 ease-out group-hover:w-full ${isScrolled ? 'bg-[#ffedd5]' : 'bg-[#1a0a00]'
+                  }`}></span>
+              </a>
+
+              <a href="#journey" className="relative group pb-0.5 inline-block flex-1 text-center">
+                <span className="transition-opacity group-hover:opacity-80">JOURNEY</span>
+                <span className={`absolute bottom-0 left-1/2 w-0 h-[1.5px] -translate-x-1/2 transition-all duration-300 ease-out group-hover:w-full ${isScrolled ? 'bg-[#ffedd5]' : 'bg-[#1a0a00]'
+                  }`}></span>
+              </a>
+
+              <a href="#councils" className="relative group pb-0.5 inline-block flex-1 text-center">
+                <span className="transition-opacity group-hover:opacity-80">COUNCILS</span>
+                <span className={`absolute bottom-0 left-1/2 w-0 h-[1.5px] -translate-x-1/2 transition-all duration-300 ease-out group-hover:w-full ${isScrolled ? 'bg-[#ffedd5]' : 'bg-[#1a0a00]'
+                  }`}></span>
+              </a>
+
+              <a href="#contact" className="relative group pb-0.5 inline-block flex-1 text-center">
+                <span className="transition-opacity group-hover:opacity-80">CONTACT</span>
+                <span className={`absolute bottom-0 left-1/2 w-0 h-[1.5px] -translate-x-1/2 transition-all duration-300 ease-out group-hover:w-full ${isScrolled ? 'bg-[#ffedd5]' : 'bg-[#1a0a00]'
+                  }`}></span>
+              </a>
+
+              <a href="https://unstop.com/p/prakalp-40-fr-conceicao-rodrigues-college-of-engineering-frcrce-bandra-1660364?utm_medium=Share&utm_source=chrqwgfb39910&utm_campaign=Online_coding_challenge" target="_blank" rel="noopener noreferrer" className="relative group pb-0.5 inline-block flex-1 text-center">
+                <span className="transition-opacity group-hover:opacity-80">REGISTER NOW</span>
+                <span className={`absolute bottom-0 left-0 w-full h-[1.5px] ${isScrolled ? 'bg-[#ffedd5]/30' : 'bg-[#1a0a00]/30'
+                  }`}></span>
+                <span className={`absolute bottom-0 left-1/2 w-0 h-[1.5px] -translate-x-1/2 transition-all duration-300 ease-out group-hover:w-full ${isScrolled ? 'bg-[#ffedd5]' : 'bg-[#1a0a00]'
+                  }`}></span>
+              </a>
+            </div>
 
             <div className="md:hidden w-full flex items-center justify-between">
               <a
@@ -113,9 +113,8 @@ export default function HeroSection() {
         </nav>
 
         {/* Mobile Menu Overlay */}
-        <div className={`fixed inset-0 bg-black/95 backdrop-blur-xl z-55 flex flex-col items-center justify-center transition-all duration-500 ease-in-out pointer-events-auto ${
-          isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
-        }`}>
+        <div className={`fixed inset-0 bg-black/95 backdrop-blur-xl z-55 flex flex-col items-center justify-center transition-all duration-500 ease-in-out pointer-events-auto ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+          }`}>
           {/* Close Button */}
           <button
             onClick={() => setIsMobileMenuOpen(false)}
@@ -143,10 +142,9 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              style={{ 
+              style={{
                 fontFamily: "'Dune Rise', sans-serif",
-                WebkitTextStroke: '2px rgba(255,220,80,1)',
-                textShadow: '0 0 20px rgba(255,255,200,1), 0 0 40px rgba(255,200,100,1), 0 0 60px rgba(255,166,0,1), 0 0 100px rgba(255,102,0,0.9), 0 0 150px rgba(255,60,0,0.6), 2px 2px 6px rgba(0,0,0,0.4)'
+
               }}
               className="text-[8vw] md:text-[6vw] lg:text-[7vw] tracking-widest font-black text-[#ffedd5] mb-2 leading-tight"
             >
