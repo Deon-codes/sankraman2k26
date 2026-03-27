@@ -1,12 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function CouncilsSection() {
   const councils = [
-    { name: "WIE", fullName: "Women in Engineering", description: "IEEE Women in Engineering — empowering women in STEM through mentorship, leadership programs, and community building. WiE CRCE champions diversity and inclusion in engineering." },
-    { name: "PCELL", fullName: "Project Cell", description: "The hub of applied engineering at CRCE. Project Cell drives student innovation from ideation to implementation, nurturing projects that solve real problems and create lasting impact." },
-    { name: "IEEE", fullName: "Institute of Electrical & Electronics Engineers", description: "The world's largest technical professional organization, driving innovation across technology disciplines. IEEE CRCE fosters technical excellence." }
+    { logo: "/logos/wie.png", alt: "WIE", description: "IEEE Women in Engineering — empowering women in STEM through mentorship, leadership programs, and community building. WiE CRCE champions diversity and inclusion in engineering." },
+    { logo: "/logos/project_cell.png", alt: "Project Cell", description: "The hub of applied engineering at CRCE. Project Cell drives student innovation from ideation to implementation, nurturing projects that solve real problems and create lasting impact." },
+    { logo: "/logos/ieee.png", alt: "IEEE", description: "The world's largest technical professional organization, driving innovation across technology disciplines. IEEE CRCE fosters technical excellence." }
   ];
 
   return (
@@ -51,15 +52,14 @@ export default function CouncilsSection() {
 
                 {/* Content */}
                 <div className="text-center relative z-10">
-                  <h3
-                    className="text-xl sm:text-2xl md:text-3xl text-[#ff6600] mb-3 tracking-wider group-hover:text-[#ffaa00] transition-colors drop-shadow-[0_0_25px_rgba(255,102,0,0.7)]"
-                    style={{ fontFamily: "'Dune Rise', sans-serif" }}
-                  >
-                    {council.name}
-                  </h3>
-
-                  <div className="text-[0.5rem] sm:text-[0.6rem] md:text-xs font-black tracking-[0.2em] text-[#ffedd5]/80 uppercase mb-4 drop-shadow-sm">
-                    {council.fullName}
+                  <div className="flex justify-center mb-6">
+                    <Image
+                      src={council.logo}
+                      alt={council.alt}
+                      width={150}
+                      height={100}
+                      className="h-20 sm:h-24 md:h-28 w-auto group-hover:drop-shadow-[0_0_25px_rgba(255,102,0,0.7)] transition-all duration-500"
+                    />
                   </div>
 
                   <p className="text-xs sm:text-sm md:text-base text-[#ffedd5]/90 leading-relaxed tracking-wide drop-shadow-sm">
