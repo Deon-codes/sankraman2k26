@@ -108,29 +108,39 @@ export default function ContactSection() {
               CONTACT HEADS
             </div>
             <div className="space-y-3 text-[#ffedd5]/90 text-xs sm:text-sm">
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-[#ff6600]/20 pb-2">
-                <span>Kunal Sarvaiya <span className="text-[#ff6600] text-[0.5rem] sm:text-[0.65rem] ml-1">IEEE PR</span></span>
-                <div className="flex items-center gap-3 mt-1 sm:mt-0 ml-auto">
-                  <span className="font-mono text-[0.7rem] sm:text-xs">+91 79001 88666</span>
-                  <a href="https://wa.me/919700188666" target="_blank" rel="noopener noreferrer" className="text-[#ff6600] hover:text-[#ffaa00] transition-colors flex-shrink-0">
-                    <FaWhatsapp size={16} />
-                  </a>
+              
+              <div className="flex flex-col sm:flex-row justify-between items-start border-b border-[#ff6600]/20 pb-2">
+                <div className="flex flex-col">
+                  <span>Aahana Peter</span>
+                  <span className="text-[#ff6600] text-[0.5rem] sm:text-[0.65rem]">WIE PR</span>
                 </div>
-              </div>
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-[#ff6600]/20 pb-2">
-                <span>Aahana Peter <span className="text-[#ff6600] text-[0.5rem] sm:text-[0.65rem] ml-1">WIE PR</span></span>
-                <div className="flex items-center gap-3 mt-1 sm:mt-0 ml-auto">
+                <div className="flex items-center gap-3 mt-2 sm:mt-0 ml-auto">
                   <span className="font-mono text-[0.7rem] sm:text-xs">+91 87796 14123</span>
                   <a href="https://wa.me/918779614123" target="_blank" rel="noopener noreferrer" className="text-[#ff6600] hover:text-[#ffaa00] transition-colors flex-shrink-0">
                     <FaWhatsapp size={16} />
                   </a>
                 </div>
               </div>
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-[#ff6600]/20 pb-2">
-                <span>Pranav Koradiya <span className="text-[#ff6600] text-[0.5rem] sm:text-[0.65rem] ml-1">Project Cell Co-lead</span></span>
-                <div className="flex items-center gap-3 mt-1 sm:mt-0 ml-auto">
+              <div className="flex flex-col sm:flex-row justify-between items-start border-b border-[#ff6600]/20 pb-2">
+                <div className="flex flex-col">
+                  <span>Pranav Koradiya</span>
+                  <span className="text-[#ff6600] text-[0.5rem] sm:text-[0.65rem]">Project Cell Co-lead</span>
+                </div>
+                <div className="flex items-center gap-3 mt-2 sm:mt-0 ml-auto">
                   <span className="font-mono text-[0.7rem] sm:text-xs">+91 97692 04570</span>
                   <a href="https://wa.me/919769204570" target="_blank" rel="noopener noreferrer" className="text-[#ff6600] hover:text-[#ffaa00] transition-colors flex-shrink-0">
+                    <FaWhatsapp size={16} />
+                  </a>
+                </div>
+              </div>
+              <div className="flex flex-col sm:flex-row justify-between items-start border-b border-[#ff6600]/20 pb-2">
+                <div className="flex flex-col">
+                  <span>Kunal Sarvaiya</span>
+                  <span className="text-[#ff6600] text-[0.5rem] sm:text-[0.65rem]">IEEE PR</span>
+                </div>
+                <div className="flex items-center gap-3 mt-2 sm:mt-0 ml-auto">
+                  <span className="font-mono text-[0.7rem] sm:text-xs">+91 79001 88666</span>
+                  <a href="https://wa.me/919700188666" target="_blank" rel="noopener noreferrer" className="text-[#ff6600] hover:text-[#ffaa00] transition-colors flex-shrink-0">
                     <FaWhatsapp size={16} />
                   </a>
                 </div>
