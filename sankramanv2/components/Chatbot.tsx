@@ -267,6 +267,15 @@ export default function Chatbot() {
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [iconOpacity, setIconOpacity] = useState(0);
+  // tracks which download links are in progress: key = `${msgIndex}-${linkIndex}`
+  const [downloadStates, setDownloadStates] = useState<Record<string, "downloading" | "done">>({});
+
+  const handleDownloadClick = useCallback((key: string) => {
+    setDownloadStates((prev) => ({ ...prev, [key]: "downloading" }));
+    setTimeout(() => {
+      setDownloadStates((prev) => ({ ...prev, [key]: "done" }));
+    }, 2000);
+  }, []);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -378,18 +387,35 @@ export default function Chatbot() {
                 {msg.text}
                 {msg.links && (
                   <div className="mt-2 flex flex-col gap-1.5">
-                    {msg.links.map((link, j) => (
-                      <a
-                        key={j}
-                        href={link.url}
-                        target={link.download ? undefined : "_blank"}
-                        rel="noopener noreferrer"
-                        download={link.download || undefined}
-                        className="block text-center border border-[#ff6600]/50 rounded-lg px-3 py-1.5 text-[#ff6600] hover:bg-[#ff6600]/15 transition-colors text-[0.62rem] tracking-wider font-bold"
-                      >
-                        {link.label}
-                      </a>
-                    ))}
+                    {msg.links.map((link, j) => {
+                      const key = `${i}-${j}`;
+                      const dlState = downloadStates[key];
+                      const isDone = dlState === "done";
+                      const isDownloading = dlState === "downloading";
+                      return (
+                        <a
+                          key={j}
+                          href={link.url}
+                          target={link.download ? undefined : "_blank"}
+                          rel="noopener noreferrer"
+                          download={link.download || undefined}
+                          onClick={() => link.download && handleDownloadClick(key)}
+                          className={`block text-center border rounded-lg px-3 py-1.5 transition-all duration-300 text-[0.62rem] tracking-wider font-bold ${
+                            isDone
+                              ? "border-green-500/60 bg-green-500/10 text-green-400"
+                              : isDownloading
+                              ? "border-[#ff6600]/30 bg-[#ff6600]/5 text-[#ff6600]/50 cursor-wait"
+                              : "border-[#ff6600]/50 text-[#ff6600] hover:bg-[#ff6600]/15"
+                          }`}
+                        >
+                          {isDone
+                            ? "✓ Downloaded!"
+                            : isDownloading
+                            ? "Downloading..."
+                            : link.label}
+                        </a>
+                      );
+                    })}
                   </div>
                 )}
               </div>

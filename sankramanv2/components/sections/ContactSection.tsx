@@ -1,9 +1,20 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FaWhatsapp, FaDownload } from "react-icons/fa";
+import { FaWhatsapp, FaDownload, FaCheck, FaSpinner } from "react-icons/fa";
+import { useState, useCallback } from "react";
+
+type DlState = "idle" | "downloading" | "done";
 
 export default function ContactSection() {
+  const [dlInternal, setDlInternal] = useState<DlState>("idle");
+  const [dlExternal, setDlExternal] = useState<DlState>("idle");
+
+  const handleDownload = useCallback((setter: (s: DlState) => void) => {
+    setter("downloading");
+    setTimeout(() => setter("done"), 2000);
+  }, []);
+
   return (
     <div id="contact" className="relative min-h-screen flex items-center justify-center py-20">
 
@@ -84,10 +95,21 @@ export default function ContactSection() {
             <a
               href="/brouchures/Prakalp_4.0_FRCRCE_Teams_Only_Brochure.pdf"
               download
-              className="group p-6 rounded-xl bg-gradient-to-br from-[#ff6600]/10 to-[#ff6600]/5 backdrop-blur-sm border border-[#ff6600]/30 hover:border-[#ff6600]/60 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(255,102,0,0.4)] transition-all duration-500 flex flex-col items-center justify-center"
+              onClick={() => handleDownload(setDlInternal)}
+              className={`group p-6 rounded-xl backdrop-blur-sm border transition-all duration-500 flex flex-col items-center justify-center hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(255,102,0,0.4)] ${
+                dlInternal === "done"
+                  ? "bg-green-500/10 border-green-500/40"
+                  : "bg-gradient-to-br from-[#ff6600]/10 to-[#ff6600]/5 border-[#ff6600]/30 hover:border-[#ff6600]/60"
+              }`}
             >
-              <div className="mb-4 text-[#ff6600] group-hover:scale-110 transition-transform duration-300">
-                <FaDownload size={32} />
+              <div className={`mb-4 transition-all duration-300 ${dlInternal === "done" ? "text-green-400" : "text-[#ff6600] group-hover:scale-110"}`}>
+                {dlInternal === "downloading" ? (
+                  <FaSpinner size={32} className="animate-spin" />
+                ) : dlInternal === "done" ? (
+                  <FaCheck size={32} />
+                ) : (
+                  <FaDownload size={32} />
+                )}
               </div>
               <h3 className="text-sm sm:text-base font-bold text-[#ffedd5] mb-2 text-center">
                 FR.CRCE Teams Brochure
@@ -95,8 +117,10 @@ export default function ContactSection() {
               <p className="text-[0.65rem] sm:text-xs text-[#ffedd5]/70 text-center mb-4">
                 Internal teams & participants
               </p>
-              <div className="text-[0.6rem] sm:text-xs text-[#ff6600] font-semibold group-hover:text-[#ffaa00] transition-colors">
-                ↓ Download PDF
+              <div className={`text-[0.6rem] sm:text-xs font-semibold transition-colors ${
+                dlInternal === "done" ? "text-green-400" : dlInternal === "downloading" ? "text-[#ff6600]/50" : "text-[#ff6600] group-hover:text-[#ffaa00]"
+              }`}>
+                {dlInternal === "downloading" ? "Downloading..." : dlInternal === "done" ? "✓ Downloaded!" : "↓ Download PDF"}
               </div>
             </a>
 
@@ -104,10 +128,21 @@ export default function ContactSection() {
             <a
               href="/brouchures/Prakalp_4.0_PR_Brochure_External.pdf"
               download
-              className="group p-6 rounded-xl bg-gradient-to-br from-[#ff6600]/10 to-[#ff6600]/5 backdrop-blur-sm border border-[#ff6600]/30 hover:border-[#ff6600]/60 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(255,102,0,0.4)] transition-all duration-500 flex flex-col items-center justify-center"
+              onClick={() => handleDownload(setDlExternal)}
+              className={`group p-6 rounded-xl backdrop-blur-sm border transition-all duration-500 flex flex-col items-center justify-center hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(255,102,0,0.4)] ${
+                dlExternal === "done"
+                  ? "bg-green-500/10 border-green-500/40"
+                  : "bg-gradient-to-br from-[#ff6600]/10 to-[#ff6600]/5 border-[#ff6600]/30 hover:border-[#ff6600]/60"
+              }`}
             >
-              <div className="mb-4 text-[#ff6600] group-hover:scale-110 transition-transform duration-300">
-                <FaDownload size={32} />
+              <div className={`mb-4 transition-all duration-300 ${dlExternal === "done" ? "text-green-400" : "text-[#ff6600] group-hover:scale-110"}`}>
+                {dlExternal === "downloading" ? (
+                  <FaSpinner size={32} className="animate-spin" />
+                ) : dlExternal === "done" ? (
+                  <FaCheck size={32} />
+                ) : (
+                  <FaDownload size={32} />
+                )}
               </div>
               <h3 className="text-sm sm:text-base font-bold text-[#ffedd5] mb-2 text-center">
                 External Teams Brochure
@@ -115,8 +150,10 @@ export default function ContactSection() {
               <p className="text-[0.65rem] sm:text-xs text-[#ffedd5]/70 text-center mb-4">
                 For external college participants
               </p>
-              <div className="text-[0.6rem] sm:text-xs text-[#ff6600] font-semibold group-hover:text-[#ffaa00] transition-colors">
-                ↓ Download PDF
+              <div className={`text-[0.6rem] sm:text-xs font-semibold transition-colors ${
+                dlExternal === "done" ? "text-green-400" : dlExternal === "downloading" ? "text-[#ff6600]/50" : "text-[#ff6600] group-hover:text-[#ffaa00]"
+              }`}>
+                {dlExternal === "downloading" ? "Downloading..." : dlExternal === "done" ? "✓ Downloaded!" : "↓ Download PDF"}
               </div>
             </a>
           </div>
