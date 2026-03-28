@@ -1,11 +1,18 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import { animate } from "animejs";
+
+const TOTAL_FRAMES = 148;
+
+const framePaths = Array.from({ length: TOTAL_FRAMES }, (_, i) => {
+  const frameNumber = String(i + 1).padStart(3, "0");
+  return `/public5/ezgif-frame-${frameNumber}.jpg`;
+});
 
 export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [currentFrame, setCurrentFrame] = useState(0);
 
   // Track scroll specifically for the Hero section
   const { scrollYProgress } = useScroll({
@@ -13,24 +20,28 @@ export default function HeroSection() {
     offset: ["start start", "end end"]
   });
 
-  // Calculate parallax offsets. Ending at 0.4 gives a more responsive feel while still allowing a brief pause.
-  const textY = useTransform(scrollYProgress, [0, 0.2], ["100vh", "-15vh"]);
-  const textScale = useTransform(scrollYProgress, [0, 0.2], [0.8, 1]);
-  const textOpacity = useTransform(scrollYProgress, [0, 0.05, 0.2], [0, 1, 1]);
+  // Keep text reveal timing near the initial viewport so it feels the same even with longer scroll duration.
+  const textY = useTransform(scrollYProgress, [0.05, 0.15], ["100vh", "-15vh"]);
+  const textScale = useTransform(scrollYProgress, [0.05, 0.15], [0.8, 1]);
+  const textOpacity = useTransform(scrollYProgress, [0.05, 0.08, 0.15], [0, 1, 1]);
   const heroOpacity = useTransform(scrollYProgress, [0.8, 1], [1, 0]);
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const scrollChevronRef = useRef<HTMLDivElement>(null);
+
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    const frame = Math.min(
+      TOTAL_FRAMES - 1,
+      Math.floor(latest * TOTAL_FRAMES)
+    );
+    setCurrentFrame(frame);
+  });
 
   useEffect(() => {
-    if (!scrollChevronRef.current) return;
-    animate(scrollChevronRef.current, {
-      translateY: [-6, 6],
-      duration: 900,
-      direction: "alternate",
-      loop: true,
-      ease: (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t,
+    // Preload sequence frames for smoother playback while scrolling.
+    framePaths.forEach((src) => {
+      const image = new Image();
+      image.src = src;
     });
   }, []);
 
@@ -46,19 +57,23 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <div ref={containerRef} id="home" className="relative min-h-[200vh]">
+    <div ref={containerRef} id="home" className="relative min-h-[520vh]">
       {/* Sticky inner container */}
       <motion.div style={{ opacity: heroOpacity }} className="sticky top-0 h-screen w-full">
 
-        {/* Background Layer: bg.jpg */}
+        {/* Scroll-driven image sequence (all frames from /public/public5) */}
         <div className="absolute inset-0 z-0 pointer-events-none">
-          <img src="/bg.jpg" alt="Dune Background" className="w-full h-full object-cover" />
+          <img
+            src={framePaths[currentFrame]}
+            alt="Sankraman landing sequence"
+            className="w-full h-full object-cover"
+            draggable={false}
+          />
         </div>
 
         {/* Navbar */}
-        <nav className={`absolute top-0 left-0 w-full z-50 px-8 py-8 md:px-12 flex items-center justify-center pointer-events-auto transition-all duration-300 ${isScrolled ? 'bg-black/60 backdrop-blur-md' : 'bg-transparent'
-          }`}>
-          <div className={`w-full max-w-7xl flex justify-between items-center text-xs font-black tracking-[0.4em] uppercase transition-colors duration-300 ${isScrolled ? 'text-[#ffedd5]' : 'text-[#1a0a00]'
+        <nav className="absolute top-0 left-0 w-full z-50 px-8 py-8 md:px-12 flex items-center justify-center pointer-events-auto bg-transparent transition-all duration-300">
+          <div className={`w-full max-w-7xl flex justify-between items-center text-xs font-black tracking-[0.4em] uppercase transition-colors duration-300 ${isScrolled ? 'text-[#ffedd5]' : 'text-[#ffedd5]'
             } ${!isScrolled && 'mix-blend-multiply opacity-90'}`}>
 
             {/* All Elements Equally Spaced */}
@@ -141,7 +156,7 @@ export default function HeroSection() {
             <a href="#journey" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#ff6600] transition-colors">JOURNEY</a>
             <a href="#councils" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#ff6600] transition-colors">COUNCILS</a>
             <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#ff6600] transition-colors">CONTACT</a>
-            <a href="https://unstop.com/p/prakalp-40-fr-conceicao-rodrigues-college-of-engineering-frcrce-bandra-1660364?utm_medium=Share&utm_source=chrqwgfb39910&utm_campaign=Online_coding_challenge" target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileMenuOpen(false)} className="text-[#ff6600] hover:text-[#ffaa00] transition-colors mt-4">REGISTER NOW</a>
+            <a href="https://unstop.com/p/prakalp-40-fr-conceicao-rodrigues-college-of-engineering-frcrce-bandra-1660364?utm_medium=Share&utm_source=chrqwgfb39910&utm_campaign=Online_coding_challenge" target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileMenuOpen(false)} className="text-[#ff6600] hover:text-[#ffaa00]  transition-colors mt-4">REGISTER NOW</a>
           </div>
         </div>
 
@@ -154,7 +169,7 @@ export default function HeroSection() {
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 0.8, delay:0.5 }}
               style={{
                 fontFamily: "'Dune Rise', sans-serif",
 
@@ -167,16 +182,7 @@ export default function HeroSection() {
           </motion.div>
         </div>
 
-        {/* Foreground Dune Mask (z-20) */}
-        <div className="absolute inset-0 z-20 pointer-events-none">
-          <img src="/fg.png" alt="Dune Foreground Mask" className="w-full h-full object-cover" />
-        </div>
-
-
-
-
-
-        {/* Register CTA + scroll chevrons — above the dune (z-30) */}
+        {/* Register CTA — above the dune (z-30) */}
         <div className="absolute bottom-16 md:bottom-20 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-3 pointer-events-auto">
           <a
             href="#contact"
@@ -189,23 +195,6 @@ export default function HeroSection() {
               REGISTER NOW
             </span>
           </a>
-          <div ref={scrollChevronRef} className="flex flex-col items-center opacity-70 pointer-events-none">
-            <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
-              <path d="M4 7l6 6 6-6" stroke="#ffedd5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" className="opacity-50 -mt-2">
-              <path d="M4 7l6 6 6-6" stroke="#ffedd5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </div>
-        </div>
-
-        {/* Bottom Center Council Logos */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 md:bottom-8 z-30 pointer-events-none">
-          <div className="flex items-center justify-center gap-6 md:gap-10">
-            <img src="/logos/wie.png" alt="WIE Logo" className="h-10 md:h-12 opacity-100 hover:brightness-110 transition-all duration-300" />
-            <img src="/logos/project_cell.png" alt="Project Cell Logo" className="h-10 md:h-12 opacity-100 hover:brightness-110 transition-all duration-300" />
-            <img src="/logos/ieee.png" alt="IEEE Logo" className="h-10 md:h-12 opacity-100 hover:brightness-110 transition-all duration-300" />
-          </div>
         </div>
 
       </motion.div>

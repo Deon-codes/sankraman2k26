@@ -46,19 +46,15 @@ export default function AboutSection() {
   return (
     <div ref={sectionRef} id="about" className="relative min-h-screen flex items-center justify-center py-20">
 
-      {/* Blur layer — masked so blur fades in from top and out at bottom */}
+      {/* Blur layer */}
       <div
         className="absolute inset-0 backdrop-blur-md pointer-events-none"
-        style={{
-          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)',
-          maskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)',
-        }}
       />
-      {/* Dark overlay — same gradient mask so it fades at edges */}
+      {/* Dark overlay */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.75) 12%, rgba(0,0,0,0.75) 88%, rgba(0,0,0,0.3) 100%)',
+          background: 'rgba(0,0,0,0.75)',
         }}
       />
 
@@ -89,7 +85,7 @@ export default function AboutSection() {
             PRAKALP 4.0 is our flagship National-Level Project Exhibition competition organized by IEEE, WIE, and the Project Cell of FR. CRCE. Now in its 4th edition, it provides a massive platform for over 120+ teams from 25+ colleges across India to showcase breakthrough hardware and software innovations to top industry experts.
           </p>
           <p data-para className="text-sm sm:text-base md:text-lg lg:text-xl text-[#ffedd5]/90 leading-relaxed md:leading-loose tracking-normal md:tracking-wide drop-shadow-lg">
-            Built around the theme &quot;Sankraman&quot; — from idea to impact, PRAKALP focuses on real-world problem-solving, technical excellence, and innovation that creates meaningful change.
+            Built around the theme &quot;Sankraman&quot; from idea to impact, PRAKALP focuses on real-world problem-solving, technical excellence, and innovation that creates meaningful change.
           </p>
         </div>
 

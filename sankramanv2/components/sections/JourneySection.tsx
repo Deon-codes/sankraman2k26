@@ -58,19 +58,15 @@ export default function JourneySection() {
   return (
     <div ref={sectionRef} id="journey" className="relative min-h-screen flex items-center justify-center py-20">
 
-      {/* Blur layer — fades at top and bottom */}
+      {/* Blur layer */}
       <div
         className="absolute inset-0 backdrop-blur-lg pointer-events-none"
-        style={{
-          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)',
-          maskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)',
-        }}
       />
       {/* Dark overlay */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.78) 12%, rgba(0,0,0,0.78) 88%, rgba(0,0,0,0.3) 100%)',
+          background: 'rgba(0,0,0,0.78)',
         }}
       />
 

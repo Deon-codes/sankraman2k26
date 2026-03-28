@@ -327,7 +327,7 @@ export default function Chatbot() {
     <>
       {/* ── Chat Window ───────────────────────────────────────────────────── */}
       <div
-        className={`fixed bottom-24 right-4 sm:right-6 z-[200] flex flex-col rounded-2xl overflow-hidden transition-all duration-300 ease-out origin-bottom-right ${
+        className={`fixed bottom-40 right-4 sm:right-6 z-[200] flex flex-col rounded-2xl overflow-hidden transition-all duration-300 ease-out origin-bottom-right ${
           isOpen
             ? "opacity-100 scale-100 pointer-events-auto"
             : "opacity-0 scale-90 pointer-events-none"
@@ -484,7 +484,7 @@ export default function Chatbot() {
         type="button"
         onClick={() => setIsOpen((v) => !v)}
         aria-label="Open event assistant"
-        className="fixed bottom-6 right-4 sm:right-6 z-[200] w-14 h-14 rounded-full bg-black border-2 border-[#ff6600] flex items-center justify-center transition-all duration-300 hover:scale-110 hover:border-[#ffaa00] neon-btn"
+        className="fixed bottom-24 right-4 sm:right-6 z-[200] w-14 h-14 rounded-full bg-black border-2 border-[#ff6600] flex items-center justify-center transition-all duration-300 hover:scale-110 hover:border-[#ffaa00] neon-btn"
         style={{
           opacity: iconOpacity,
           pointerEvents: iconOpacity < 0.1 ? "none" : "auto",
