@@ -36,27 +36,23 @@ export default function CouncilsSection() {
     return () => observer.disconnect();
   }, []);
   const councils = [
-    { logo: "/logos/wie.png", alt: "WIE", description: "IEEE Women in Engineering — empowering women in STEM through mentorship, leadership programs, and community building. WiE CRCE champions diversity and inclusion in engineering." },
-    { logo: "/logos/project_cell.png", alt: "Project Cell", description: "The hub of applied engineering at CRCE. Project Cell drives student innovation from ideation to implementation, nurturing projects that solve real problems and create lasting impact." },
-    { logo: "/logos/ieee.png", alt: "IEEE", description: "The world's largest technical professional organization, driving innovation across technology disciplines. IEEE CRCE fosters technical excellence." }
+    { logo: "/logos/wie.png", alt: "WIE", description: "IEEE Women in Engineering empowering women in STEM through mentorship, leadership programs, and community building. WiE CRCE champions diversity and inclusion in engineering." },
+    { logo: "/logos/project_cell.png", alt: "Project Cell", description: "The Hub of applied engineering at CRCE. Project Cell drives student innovation from ideation to implementation, nurturing projects that solve real problems and create lasting impact." },
+    { logo: "/logos/ieee.png", alt: "IEEE", description: "The world's largest technical professional organization, driving innovation across technology discipline. IEEE CRCE fosters technical excellence and innovation platform." }
   ];
 
   return (
     <div ref={sectionRef} id="councils" className="relative min-h-screen flex items-center justify-center py-20">
 
-      {/* Blur layer — fades at top and bottom */}
+      {/* Blur layer */}
       <div
         className="absolute inset-0 backdrop-blur-xl pointer-events-none"
-        style={{
-          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)',
-          maskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)',
-        }}
       />
       {/* Dark overlay */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.78) 12%, rgba(0,0,0,0.78) 88%, rgba(0,0,0,0.3) 100%)',
+          background: 'rgba(0,0,0,0.78)',
         }}
       />
 
@@ -111,7 +107,7 @@ export default function CouncilsSection() {
                 </div>
 
                 {/* Hover glow effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[#ff6600]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-lg" />
+                <div className="absolute inset-0 bg-linear-to-br from-[#ff6600]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-lg" />
 
                 {/* Subtle inner glow */}
                 <div className="absolute inset-0 rounded-lg shadow-inner shadow-[#ff6600]/20 opacity-0 group-hover:opacity-50 transition-opacity duration-500" />

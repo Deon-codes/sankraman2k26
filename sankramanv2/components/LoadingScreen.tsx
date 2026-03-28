@@ -5,6 +5,7 @@ import { animate, createTimeline, stagger } from "animejs";
 
 interface LoadingScreenProps {
   onComplete: () => void;
+  imagesReady?: Promise<void>;
 }
 
 const LETTERS = "SANKRAMAN".split("");
@@ -39,7 +40,7 @@ const SAND_PARTICLES = Array.from({ length: 18 }, (_, i) => ({
   drift: (i % 2 === 0 ? 1 : -1) * (10 + (i % 3) * 5),
 }));
 
-export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
+export default function LoadingScreen({ onComplete, imagesReady }: LoadingScreenProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
   const topBarRef = useRef<HTMLDivElement>(null);
@@ -133,7 +134,15 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
     };
 
     // ── Main timeline ───────────────────────────────────────────────────────
-    const tl = createTimeline({ onComplete: exit });
+    const tl = createTimeline({
+      onComplete: () => {
+        if (imagesReady) {
+          imagesReady.then(exit);
+        } else {
+          exit();
+        }
+      },
+    });
 
     // Energy wave pulses out from center
     tl.add(
@@ -255,7 +264,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
     return () => {
       tl.pause();
     };
-  }, [onComplete]);
+  }, [onComplete, imagesReady]);
 
   return (
     <div

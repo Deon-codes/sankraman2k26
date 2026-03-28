@@ -4,151 +4,146 @@ import { motion } from "framer-motion";
 import { FaEnvelope, FaInstagram } from "react-icons/fa";
 import Image from "next/image";
 
+const contacts = [
+  {
+    logo: "/logos/ieee.png",
+    alt: "IEEExCRCE",
+    name: "IEEExCRCE",
+    instagram: "https://instagram.com/ieee_crce",
+    website: "https://ieee-crce202526.netlify.app/",
+    handle: "@ieee_crce",
+    email: "ieeece.24@gmail.com",
+  },
+    {
+    logo: "/logos/project_cell.png",
+    alt: "Project Cell",
+    name: "PROJECT CELL",
+    instagram: "https://instagram.com/project_cell.crce",
+    website: "https://project-cell-crce.vercel.app/",
+    handle: "@project_cell.crce",
+    email: "projectcellcrce2024@gmail.com",
+  },
+  {
+    logo: "/logos/wie.png",
+    alt: "WIExCRCE",
+    name: "WIExCRCE",
+    instagram: "https://instagram.com/wie_crce",
+    website: "https://wiecrce-website.netlify.app/",
+    handle: "@wie_crce",
+    email: "wieieee.21@gmail.com",
+  },
+];
+
 export default function Footer() {
   return (
     <motion.footer
-      className="relative py-20 px-8 md:px-12 border-t border-[#ff6600]/20"
+      className="relative"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, ease: "easeOut" }}
     >
-      {/* Dark glassmorphism background matching the theme */}
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-xl" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/60" />
-
-      <div className="relative z-10 max-w-6xl mx-auto">
-        {/* Brand and main info */}
-        <motion.div
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <h3
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl tracking-wider md:tracking-widest text-[#ffedd5] mb-4 drop-shadow-[0_0_20px_rgba(255,166,0,0.6)]"
-            style={{ fontFamily: "'Dune Rise', sans-serif" }}
-          >
-            SANKRAMAN
-          </h3>
-          <p className="text-[#ff6600] text-sm lg:text-base xl:text-lg tracking-[0.3em] uppercase">
-            Engineering the Transition
-          </p>
-        </motion.div>
-
-        {/* Contact Information */}
-        <motion.div
-          className="mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.35 }}
-        >
-          <div className="space-y-8">
-            {/* Top row: IEEE and WiE side by side */}
-            <div className="grid grid-cols-2 gap-2 sm:gap-6">
-              {/* IEEE Contact */}
-              <div className="text-center">
-                <div className="flex justify-center mb-3">
-                  <Image
-                    src="/logos/ieee.png"
-                    alt="IEEE"
-                    width={80}
-                    height={60}
-                    className="h-12 sm:h-16 lg:h-20 xl:h-24 w-auto"
-                  />
-                </div>
-                
-                {/* Instagram with icon */}
-                <a href="https://instagram.com/ieee_crce" target="_blank" rel="noopener noreferrer" className="flex flex-row items-center justify-center gap-2 mb-2">
-                  <FaInstagram size={18} className="text-[#ff6600]" />
-                  <span className="text-[0.6rem] sm:text-[0.7rem] lg:text-sm xl:text-base text-[#ffedd5]/80 hover:text-[#ff6600] transition-colors">
-                    @ieee_crce
-                  </span>
-                </a>
-                
-                {/* Email with icon */}
-                <div className="flex items-center justify-center gap-2">
-                  <FaEnvelope size={12} className="text-[#ff6600]" />
-                  <a href="mailto:ieeece.24@gmail.com" className="text-[0.6rem] sm:text-[0.7rem] lg:text-sm xl:text-base text-[#ffedd5]/80 hover:text-[#ff6600] transition-colors">
-                    ieeece.24@gmail.com
-                  </a>
-                </div>
-              </div>
-
-              {/* WIE Contact */}
-              <div className="text-center">
-                <div className="flex justify-center mb-3">
-                  <Image
-                    src="/logos/wie.png"
-                    alt="WIE"
-                    width={80}
-                    height={60}
-                    className="h-12 sm:h-16 lg:h-20 xl:h-24 w-auto"
-                  />
-                </div>
-                
-                {/* Instagram with icon */}
-                <a href="https://instagram.com/wie_crce" target="_blank" rel="noopener noreferrer" className="flex flex-row items-center justify-center gap-2 mb-2">
-                  <FaInstagram size={18} className="text-[#ff6600]" />
-                  <span className="text-[0.6rem] sm:text-[0.7rem] lg:text-sm xl:text-base text-[#ffedd5]/80 hover:text-[#ff6600] transition-colors">
-                    @wie_crce
-                  </span>
-                </a>
-                
-                {/* Email with icon */}
-                <div className="flex items-center justify-center gap-2">
-                  <FaEnvelope size={12} className="text-[#ff6600]" />
-                  <a href="mailto:wieieee.21@gmail.com" className="text-[0.6rem] sm:text-[0.7rem] lg:text-sm xl:text-base text-[#ffedd5]/80 hover:text-[#ff6600] transition-colors">
-                    wieieee.21@gmail.com
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* Bottom: PROJECT CELL full width */}
-            <div className="text-center pt-4">
-              <div className="flex justify-center mb-3">
-                <Image
-                  src="/logos/project_cell.png"
-                  alt="Project Cell"
-                  width={120}
-                  height={60}
-                  className="h-12 sm:h-16 lg:h-20 xl:h-24 w-auto"
-                />
-              </div>
-              
-              {/* Instagram with icon */}
-              <a href="https://instagram.com/project_cell.crce" target="_blank" rel="noopener noreferrer" className="flex flex-row items-center justify-center gap-2 mb-2">
-                <FaInstagram size={18} className="text-[#ff6600]" />
-                <span className="text-[0.6rem] sm:text-[0.7rem] lg:text-sm xl:text-base text-[#ffedd5]/80 hover:text-[#ff6600] transition-colors">
-                  @project_cell.crce
-                </span>
-              </a>
-              
-              {/* Email with icon */}
-              <div className="flex items-center justify-center gap-2">
-                <FaEnvelope size={12} className="text-[#ff6600]" />
-                <a href="mailto:projectcellcrce2024@gmail.com" className="text-[0.6rem] sm:text-[0.7rem] lg:text-sm xl:text-base text-[#ffedd5]/80 hover:text-[#ff6600] transition-colors">
-                  projectcellcrce2024@gmail.com
-                </a>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Footer text */}
-        <motion.div
-          className="text-center border-t border-[#ff6600]/10 pt-8"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          <p className="text-xs lg:text-sm xl:text-base text-[#ffedd5]/70 tracking-[0.1em]">Prakalp 4.0 | Sankraman</p>
-        </motion.div>
+      {/* Background layers */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 bg-black/60 backdrop-blur-xl" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-black/60" />
       </div>
+
+      {/* ── Organizer Cards ── */}
+      <div className="relative z-10 w-full pt-14 pb-10 px-6 md:px-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-6 w-full">
+          {contacts.map((c, i) => (
+            <motion.div
+              key={i}
+              className="flex flex-col items-center text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 + i * 0.1 }}
+            >
+              {/* Logo */}
+              <a 
+                href={c.website} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-16 h-16 mb-3 flex items-center justify-center transition-transform hover:scale-110"
+              >
+                <Image
+                  src={c.logo}
+                  alt={c.alt}
+                  width={64}
+                  height={64}
+                  className="object-contain"
+                />
+              </a>
+
+              {/* Display name */}
+              <p className="text-[#ffedd5] text-sm font-semibold tracking-widest uppercase mb-4">
+                {c.name}
+              </p>
+
+              {/* Instagram */}
+              <a
+                href={c.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-[#ffedd5]/80 hover:text-[#ff6600] transition-colors text-sm mb-1.5"
+              >
+                <FaInstagram size={14} className="text-[#ff6600] shrink-0" />
+                <span>{c.handle}</span>
+              </a>
+
+              {/* Email */}
+              <a
+                href={`mailto:${c.email}`}
+                className="flex items-center gap-2 text-[#ffedd5]/60 hover:text-[#ff6600] transition-colors text-xs break-all"
+              >
+                <FaEnvelope size={12} className="text-[#ff6600] shrink-0" />
+                <span>{c.email}</span>
+              </a>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Giant Brand Text ── */}
+      <motion.div
+        className="relative z-10 w-full select-none overflow-hidden"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.9, delay: 0.3, ease: "easeOut" }}
+      >
+        <h2
+          className="font-black leading-none tracking-tight text-[#ffedd5] text-center w-full whitespace-nowrap"
+          style={{ fontFamily: "'Dune Rise', sans-serif", fontSize: "clamp(2.5rem, 10vw, 10vw)", lineHeight: "1.2" }}
+        >
+          Prakalp 4.0
+        </h2>
+      </motion.div>
+
+      {/* ── Bottom Bar ── */}
+      <motion.div
+        className="relative z-10 border-t border-[#ff6600]/10 w-full px-6 md:px-10 py-6 flex flex-col sm:grid sm:grid-cols-3 items-center gap-4 text-[10px] text-[#ffedd5]/50 tracking-wide pb-12 sm:pb-8"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.45 }}
+      >
+        <span className="text-center sm:text-left">© 2026 Sankraman. All Rights Reserved.</span>
+
+        {/* Desktop-only Center item */}
+        <span className="hidden sm:block text-center hover:text-[#ff6600] cursor-pointer transition-colors">Prakalp 4.0</span>
+
+        {/* Desktop-only Right item */}
+        <span className="hidden sm:block text-right hover:text-[#ff6600] cursor-pointer transition-colors">Privacy Policy</span>
+
+        {/* Mobile-only Bottom and group */}
+        <div className="flex sm:hidden gap-6 items-center">
+          <span className="hover:text-[#ff6600] cursor-pointer transition-colors">Prakalp 4.0</span>
+          <span className="hover:text-[#ff6600] cursor-pointer transition-colors">Privacy Policy</span>
+        </div>
+      </motion.div>
     </motion.footer>
   );
 }
