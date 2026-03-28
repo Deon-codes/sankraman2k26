@@ -130,19 +130,6 @@ export default function Footer() {
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.45 }}
       >
-        <span className="text-center sm:text-left">© 2026 Sankraman. All Rights Reserved.</span>
-
-        {/* Desktop-only Center item */}
-        <span className="hidden sm:block text-center hover:text-[#ff6600] cursor-pointer transition-colors">Prakalp 4.0</span>
-
-        {/* Desktop-only Right item */}
-        <span className="hidden sm:block text-right hover:text-[#ff6600] cursor-pointer transition-colors">Privacy Policy</span>
-
-        {/* Mobile-only Bottom and group */}
-        <div className="flex sm:hidden gap-6 items-center">
-          <span className="hover:text-[#ff6600] cursor-pointer transition-colors">Prakalp 4.0</span>
-          <span className="hover:text-[#ff6600] cursor-pointer transition-colors">Privacy Policy</span>
-        </div>
       </motion.div>
     </motion.footer>
   );
