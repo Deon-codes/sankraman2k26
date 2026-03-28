@@ -3,7 +3,7 @@
 import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 
-const TOTAL_FRAMES = 120;
+const TOTAL_FRAMES = 90;
 
 const framePaths = Array.from({ length: TOTAL_FRAMES }, (_, i) => {
   const frameNumber = String(i + 1).padStart(3, "0");
