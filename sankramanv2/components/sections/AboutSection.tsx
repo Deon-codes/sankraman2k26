@@ -94,7 +94,7 @@ export default function AboutSection() {
           {[
             { number: "120+", label: "TEAMS" },
             { number: "25+", label: "COLLEGES" },
-            { number: "₹100K", label: "PRIZE POOL" },
+            { number: "₹1 Lakh", label: "PRIZE POOL" },
             { number: "4th", label: "EDITION" }
           ].map((stat, index) => (
             <div data-stat key={index} className="text-center p-3 md:p-4 rounded-lg bg-black/20 backdrop-blur-sm border border-[#ff6600]/20 hover:-translate-y-2 hover:scale-105 hover:shadow-[0_15px_30px_-10px_rgba(255,102,0,0.5)] transition-all duration-500">
