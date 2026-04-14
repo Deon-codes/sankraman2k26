@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { FaWhatsapp, FaDownload, FaCheck, FaSpinner, FaCopy } from "react-icons/fa";
 import { useState, useCallback } from "react";
+import Image from "next/image";
 
 type DlState = "idle" | "downloading" | "done";
 
@@ -87,6 +88,7 @@ export default function ContactSection() {
             </button>
           </a>
         </div>
+
 
         {/* Brochures Section */}
         <div className="mb-16 pt-8 pb-8 border-y border-[#ff6600]/20">
@@ -275,9 +277,33 @@ export default function ContactSection() {
                     <FaWhatsapp size={16} />
                   </a>
                 </div>
+                
               </div>
+              
             </div>
+            
           </div>
+                  {/* Sponsor */}
+        <div className="mb-16 mt-10 flex w-full flex-col items-center justify-center gap-5 md:col-span-2">
+          <div className="text-[0.7rem] md:text-sm font-black tracking-[0.45em] text-[#ff6600] uppercase opacity-100 drop-shadow-[0_0_14px_rgba(255,102,0,0.7)]">
+            Sponsored By
+          </div>
+          <a
+            href="https://quillbot.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Visit QuillBot website"
+            className="group inline-flex items-center justify-center rounded-2xl border-2 border-[#ff6600]/70 bg-linear-to-r from-[#1a0900]/95 via-black/95 to-[#1a0900]/95 px-8 py-5 backdrop-blur-sm shadow-[0_0_0_1px_rgba(255,102,0,0.45),0_14px_34px_-12px_rgba(255,102,0,0.7)] transition-all duration-500 hover:-translate-y-1 hover:border-[#ffaa00] hover:shadow-[0_0_0_1px_rgba(255,170,0,0.55),0_18px_42px_-12px_rgba(255,170,0,0.75)]"
+          >
+            <Image
+              src="/sponsor.png"
+              alt="QuillBot sponsor logo"
+              width={340}
+              height={130}
+              className="h-auto w-auto max-h-20 object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+            />
+          </a>
+        </div>
         </div>
 
       </motion.div>
