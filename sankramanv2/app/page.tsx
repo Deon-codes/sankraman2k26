@@ -19,11 +19,12 @@ const CRITICAL_IMAGES = [
 ];
 
 function preloadImages(srcs: string[]): Promise<void> {
+  if (typeof window === "undefined") return Promise.resolve();
   return Promise.all(
     srcs.map(
       (src) =>
         new Promise<void>((resolve) => {
-          const img = new Image();
+          const img = new window.Image();
           img.onload = () => resolve();
           img.onerror = () => resolve();
           img.src = src;
