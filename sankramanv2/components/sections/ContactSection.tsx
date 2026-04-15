@@ -41,10 +41,10 @@ export default function ContactSection() {
     { src: "/1/4.png", alt: "zero degree sponsor logo", baseZoom: 1.58 },
     { src: "/1/5.png", alt: "dessert on wheels sponsor logo", baseZoom: 1.18 },
     { src: "/1/6.png", alt: "evnoi sponsor logo", baseZoom: 1.6 },
-    { src: "/1/7.png", alt: "Nashik Tech sponsor logo", baseZoom: 1.2 },
+    { src: "/1/7-klaw.png", alt: "KLAW sponsor logo", baseZoom: 1.2 },
     { src: "/1/8.png", alt: "No Escape sponsor logo", baseZoom: 1.7 },
     { src: "/1/9.png", alt: "ocean sponsor logo", baseZoom: 1.6 },
-    { src: "/1/10.png", alt: "smaash sponsor logo", baseZoom: 1.7 },
+    { src: "/1/11.png", alt: "smaash sponsor logo", baseZoom: 1.7 },
   ];
 
   const SponsorCarousel = () => (
@@ -60,14 +60,14 @@ export default function ContactSection() {
           {[...sponsorLogos, ...sponsorLogos, ...sponsorLogos].map((logo, index) => (
             <div
               key={`${logo.src}-${index}`}
-              className="relative shrink-0 w-[8rem] h-[8rem] sm:w-[10rem] sm:h-[10rem] overflow-hidden rounded-2xl bg-white/90"
+              className={`relative shrink-0 ${logo.src === "/1/4.png" ? "w-48 sm:w-51 h-12 sm:h-50" : logo.src === "/1/8.png" || logo.src === "/sponsor.png" ? "w-48 sm:w-80 h-24 sm:h-40" : "w-[8rem] sm:w-[10rem] h-[8rem] sm:h-[10rem]"} overflow-hidden bg-transparent`}
             >
               <Image
                 src={logo.src}
                 alt={logo.alt}
                 fill
-                sizes="(max-width: 640px) 8rem, 10rem"
-                className="object-contain object-center p-2"
+                sizes="(max-width: 320px) 8rem, 10rem"
+                className={`${logo.src === "/1/4.png" || logo.src === "/1/8.png" || logo.src === "/sponsor.png" ? "object-contain" : "object-cover"} object-center`}
               />
             </div>
           ))}
@@ -201,7 +201,7 @@ export default function ContactSection() {
               Bandra West, Mumbai 400050
             </div>
 
-            <div className="grid grid-cols-2 gap-3 mb-4 text-[0.65rem] sm:text-xs">
+            <div className="grid grid-cols-2 gap-3 mb-4 text-[0.65rm] sm:text-xs">
               <div className="bg-black/40 backdrop-blur-sm border border-[#ff6600]/10 p-2 rounded">
                 <div className="text-[#ff6600] text-[0.55rem] uppercase font-black tracking-[0.2em] mb-1">Date</div>
                 <div className="text-[#ffedd5]/90 font-semibold">18 April 2026, Saturday</div>
