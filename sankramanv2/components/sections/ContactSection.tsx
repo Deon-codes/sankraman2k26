@@ -55,19 +55,19 @@ export default function ContactSection() {
       <div className="sponsor-carousel-viewport w-full overflow-hidden">
         <div
           ref={trackRef}
-          className={`sponsor-carousel-track flex w-max items-center gap-4 py-2 ${carouselPhase}`}
+          className={`sponsor-carousel-track flex w-max items-center gap-6 py-2 ${carouselPhase}`}
         >
           {[...sponsorLogos, ...sponsorLogos, ...sponsorLogos].map((logo, index) => (
             <div
               key={`${logo.src}-${index}`}
-              className={`relative shrink-0 ${logo.src === "/1/4.png" ? "w-48 sm:w-51 h-12 sm:h-50" : logo.src === "/1/8.png" || logo.src === "/sponsor.png" ? "w-48 sm:w-80 h-24 sm:h-40" : "w-[8rem] sm:w-[10rem] h-[8rem] sm:h-[10rem]"} overflow-hidden bg-transparent`}
+              className="relative shrink-0 w-[9rem] h-[9rem] sm:w-[10rem] sm:h-[10rem] overflow-hidden bg-transparent rounded-xl"
             >
               <Image
                 src={logo.src}
                 alt={logo.alt}
                 fill
-                sizes="(max-width: 320px) 8rem, 10rem"
-                className={`${logo.src === "/1/4.png" || logo.src === "/1/8.png" || logo.src === "/sponsor.png" ? "object-contain" : "object-cover"} object-center`}
+                sizes="(max-width: 640px) 9rem, 10rem"
+                className="object-contain object-center p-2"
               />
             </div>
           ))}
