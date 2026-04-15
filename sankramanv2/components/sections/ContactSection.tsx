@@ -2,15 +2,18 @@
 
 import { motion } from "framer-motion";
 import { FaWhatsapp, FaDownload, FaCheck, FaSpinner, FaCopy } from "react-icons/fa";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import Image from "next/image";
 
 type DlState = "idle" | "downloading" | "done";
+type CarouselPhase = "entry" | "loop";
 
 export default function ContactSection() {
   const [dlInternal, setDlInternal] = useState<DlState>("idle");
   const [dlExternal, setDlExternal] = useState<DlState>("idle");
   const [copiedPhone, setCopiedPhone] = useState<string | null>(null);
+  const [carouselPhase, setCarouselPhase] = useState<CarouselPhase>("entry");
+  const trackRef = useRef<HTMLDivElement>(null);
 
   const handleDownload = useCallback((setter: (s: DlState) => void) => {
     setter("downloading");
@@ -24,78 +27,97 @@ export default function ContactSection() {
     });
   }, []);
 
+  // Switch from entry → loop after the entry animation completes (1.8s)
+  useEffect(() => {
+    const timer = setTimeout(() => setCarouselPhase("loop"), 1800);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const sponsorLogos = [
+    { src: "/sponsor.png", alt: "Main sponsor logo", baseZoom: 1.2 },
+    { src: "/1/1.png", alt: "Belgian Waffle sponsor logo", baseZoom: 0 },
+    { src: "/1/2.png", alt: "tibs sponsor logo", baseZoom: 1.59 },
+    { src: "/1/3.png", alt: "coffee toe's Frankie sponsor logo", baseZoom: 1.6 },
+    { src: "/1/4.png", alt: "zero degree sponsor logo", baseZoom: 1.58 },
+    { src: "/1/5.png", alt: "dessert on wheels sponsor logo", baseZoom: 1.18 },
+    { src: "/1/6.png", alt: "evnoi sponsor logo", baseZoom: 1.6 },
+    { src: "/1/7-klaw.png", alt: "KLAW sponsor logo", baseZoom: 1.2 },
+    { src: "/1/8.png", alt: "No Escape sponsor logo", baseZoom: 1.7 },
+    { src: "/1/9.png", alt: "ocean sponsor logo", baseZoom: 1.6 },
+    { src: "/1/11.png", alt: "smaash sponsor logo", baseZoom: 1.7 },
+  ];
+
+  const SponsorCarousel = () => (
+    <div className="flex w-full flex-col items-center justify-center gap-4 py-8">
+      <div className="text-[0.7rem] md:text-sm font-black tracking-[0.45em] text-[#ff6600] uppercase opacity-100 drop-shadow-[0_0_14px_rgba(255,102,0,0.7)]">
+        Sponsored By
+      </div>
+      <div className="sponsor-carousel-viewport w-full overflow-hidden">
+        <div
+          ref={trackRef}
+          className={`sponsor-carousel-track flex w-max items-center gap-6 py-2 ${carouselPhase}`}
+        >
+          {[...sponsorLogos, ...sponsorLogos, ...sponsorLogos].map((logo, index) => (
+            <div
+              key={`${logo.src}-${index}`}
+              className="relative shrink-0 w-[9rem] h-[9rem] sm:w-[10rem] sm:h-[10rem] overflow-hidden bg-transparent rounded-xl"
+            >
+              <Image
+                src={logo.src}
+                alt={logo.alt}
+                fill
+                sizes="(max-width: 640px) 9rem, 10rem"
+                className="object-contain object-center p-2"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+
   return (
-    <div id="contact" className="relative min-h-screen flex items-center justify-center py-20">
+    <div id="contact" className="relative min-h-screen flex flex-col items-center justify-center py-20">
 
       {/* Blur layer */}
-      <div
-        className="absolute inset-0 backdrop-blur-2xl pointer-events-none"
-      />
+      <div className="absolute inset-0 backdrop-blur-2xl pointer-events-none" />
       {/* Dark overlay */}
       <div
         className="absolute inset-0 pointer-events-none"
-        style={{
-          background: 'rgba(0,0,0,0.82)',
-        }}
+        style={{ background: "rgba(0,0,0,0.82)" }}
       />
 
+      {/* Sponsor Carousel — full viewport width */}
+
+
+      {/* Rest of content — constrained */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="relative z-10 max-w-4xl mx-auto px-8 md:px-12 text-center"
+        className="relative z-10 w-full max-w-4xl mx-auto px-8 md:px-12 text-center"
       >
-        {/* Section Header */}
+
+        {/* Contact Us Button */}
         <div className="mb-16">
-          <div className="text-[0.55rem] md:text-xs font-black tracking-[0.4em] text-[#ff6600] uppercase mb-8 mix-blend-screen opacity-90">
-            FINAL CALL
-          </div>
-
-          <h2
-            className="text-[4vw] md:text-[3vw] lg:text-[3.5vw] tracking-widest text-[#ffedd5] mb-8 drop-shadow-[0_0_30px_rgba(255,166,0,0.6)]"
-            style={{ fontFamily: "'Dune Rise', sans-serif" }}
-          >
-            JOIN THE TRANSITION
-          </h2>
-
-          <p className="text-sm sm:text-base md:text-xl lg:text-2xl text-[#ffedd5]/90 leading-relaxed tracking-wide mb-12 drop-shadow-sm">
-            Step into SANKRAMAN, where ideas turn into impactful innovations.
-          </p>
-        </div>
-
-        {/* CTA Buttons */}
-        <div className="mb-16 flex flex-col sm:flex-row justify-center items-center gap-6">
-          <a href="https://unstop.com/p/prakalp-40-fr-conceicao-rodrigues-college-of-engineering-frcrce-bandra-1660364?utm_medium=Share&utm_source=chrqwgfb39910&utm_campaign=Online_coding_challenge" target="_blank" rel="noopener noreferrer" className="group relative border-2 border-[#ff6600] bg-black/30 backdrop-blur-sm px-12 py-4 rounded-lg overflow-hidden transition-all duration-500 hover:border-[#ffaa00] hover:bg-black/40">
+          <button className="group relative border border-[#ffedd5]/30 bg-white/5 backdrop-blur-sm px-12 py-4 rounded-lg overflow-hidden transition-all duration-500 hover:bg-white/10 hover:border-[#ffedd5]/60 cursor-pointer">
             <span
-              className="relative z-10 text-sm sm:text-base md:text-lg lg:text-xl font-black tracking-[0.3em] text-[#ff6600] uppercase group-hover:text-[#1a0a00] transition-colors duration-500 drop-shadow-sm"
+              className="relative z-10 text-sm sm:text-base md:text-lg lg:text-xl font-black tracking-[0.3em] text-[#ffedd5] uppercase transition-colors duration-500 drop-shadow-sm"
               style={{ fontFamily: "'Dune Rise', sans-serif" }}
             >
-              REGISTER NOW
+              CONTACT US
             </span>
-            <div className="absolute inset-0 bg-[#ff6600] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" />
-          </a>
-
-          <a href="#contact-heads" className="inline-block">
-            <button className="group relative border border-[#ffedd5]/30 bg-white/5 backdrop-blur-sm px-12 py-4 rounded-lg overflow-hidden transition-all duration-500 hover:bg-white/10 hover:border-[#ffedd5]/60 cursor-pointer">
-              <span
-                className="relative z-10 text-sm sm:text-base md:text-lg lg:text-xl font-black tracking-[0.3em] text-[#ffedd5] uppercase transition-colors duration-500 drop-shadow-sm"
-                style={{ fontFamily: "'Dune Rise', sans-serif" }}
-              >
-                CONTACT US
-              </span>
-              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            </button>
-          </a>
+            <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          </button>
         </div>
-
 
         {/* Brochures Section */}
         <div className="mb-16 pt-8 pb-8 border-y border-[#ff6600]/20">
           <div className="text-[0.55rem] md:text-xs font-black tracking-[0.4em] text-[#ff6600] uppercase mb-8 mix-blend-screen opacity-90">
             RESOURCES
           </div>
-          
+
           <div className="grid md:grid-cols-2 gap-6">
             {/* Internal Team Brochure */}
             <a
@@ -105,7 +127,7 @@ export default function ContactSection() {
               className={`group p-6 rounded-xl backdrop-blur-sm border transition-all duration-500 flex flex-col items-center justify-center hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(255,102,0,0.4)] ${
                 dlInternal === "done"
                   ? "bg-green-500/10 border-green-500/40"
-                  : "bg-linear-to-br from-[#ff6600]/10 to-[#ff6600]/5 border-[#ff6600]/30 hover:border-[#ff6600]/60"
+                  : "bg-gradient-to-br from-[#ff6600]/10 to-[#ff6600]/5 border-[#ff6600]/30 hover:border-[#ff6600]/60"
               }`}
             >
               <div className={`mb-4 transition-all duration-300 ${dlInternal === "done" ? "text-green-400" : "text-[#ff6600] group-hover:scale-110"}`}>
@@ -121,7 +143,7 @@ export default function ContactSection() {
                 FR.CRCE Teams Brochure
               </h3>
               <p className="text-[0.65rem] sm:text-xs text-[#ffedd5]/70 text-center mb-4">
-                Internal teams & participants
+                Internal teams &amp; participants
               </p>
               <div className={`text-[0.6rem] sm:text-xs font-semibold transition-colors ${
                 dlInternal === "done" ? "text-green-400" : dlInternal === "downloading" ? "text-[#ff6600]/50" : "text-[#ff6600] group-hover:text-[#ffaa00]"
@@ -138,7 +160,7 @@ export default function ContactSection() {
               className={`group p-6 rounded-xl backdrop-blur-sm border transition-all duration-500 flex flex-col items-center justify-center hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(255,102,0,0.4)] ${
                 dlExternal === "done"
                   ? "bg-green-500/10 border-green-500/40"
-                  : "bg-linear-to-br from-[#ff6600]/10 to-[#ff6600]/5 border-[#ff6600]/30 hover:border-[#ff6600]/60"
+                  : "bg-gradient-to-br from-[#ff6600]/10 to-[#ff6600]/5 border-[#ff6600]/30 hover:border-[#ff6600]/60"
               }`}
             >
               <div className={`mb-4 transition-all duration-300 ${dlExternal === "done" ? "text-green-400" : "text-[#ff6600] group-hover:scale-110"}`}>
@@ -165,7 +187,7 @@ export default function ContactSection() {
           </div>
         </div>
 
-        {/* Venue Info */}
+        {/* Venue + Contact Heads */}
         <div className="grid md:grid-cols-2 gap-8 text-left">
           <div className="p-6 rounded-xl bg-black/30 backdrop-blur-sm border border-[#ff6600]/20 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(255,102,0,0.4)] transition-all duration-500 flex flex-col">
             <div className="text-[0.55rem] md:text-xs font-black tracking-[0.3em] text-[#ff6600] uppercase mb-3">
@@ -179,8 +201,7 @@ export default function ContactSection() {
               Bandra West, Mumbai 400050
             </div>
 
-            {/* Event Details */}
-            <div className="grid grid-cols-2 gap-3 mb-4 text-[0.65rem] sm:text-xs">
+            <div className="grid grid-cols-2 gap-3 mb-4 text-[0.65rm] sm:text-xs">
               <div className="bg-black/40 backdrop-blur-sm border border-[#ff6600]/10 p-2 rounded">
                 <div className="text-[#ff6600] text-[0.55rem] uppercase font-black tracking-[0.2em] mb-1">Date</div>
                 <div className="text-[#ffedd5]/90 font-semibold">18 April 2026, Saturday</div>
@@ -191,7 +212,6 @@ export default function ContactSection() {
               </div>
             </div>
 
-            {/* Maps Link Button */}
             <a
               href="https://maps.app.goo.gl/9awrEXbbMHC2w8xM7"
               target="_blank"
@@ -203,112 +223,50 @@ export default function ContactSection() {
               </span>
             </a>
           </div>
+
           <div id="contact-heads" className="p-8 rounded-xl bg-black/30 backdrop-blur-sm border border-[#ff6600]/20 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(255,102,0,0.4)] transition-all duration-500 flex flex-col justify-center">
             <div className="text-[0.6rem] md:text-xs font-black tracking-[0.3em] text-[#ff6600] uppercase mb-4">
               CONTACT HEADS
             </div>
             <div className="space-y-3 text-[#ffedd5]/90 text-xs sm:text-sm">
-              
-              <div className="flex flex-col sm:flex-row justify-between items-start border-b border-[#ff6600]/20 pb-2">
-                <div className="flex flex-col">
-                  <span>Aahana Peter</span>
-                  <span className="text-[#ff6600] text-[0.5rem] sm:text-[0.65rem]">WIE PR</span>
+              {[
+                { name: "Aahana Peter", role: "WIE PR", num: "+918779614123", display: "+91 87796 14123", wa: "918779614123" },
+                { name: "Pranav Koradiya", role: "Project Cell Co-lead", num: "+919769204570", display: "+91 97692 04570", wa: "919769204570" },
+                { name: "Kunal Sarvaiya", role: "IEEE PR", num: "+917900188666", display: "+91 79001 88666", wa: "917900188666" },
+              ].map((person) => (
+                <div key={person.name} className="flex flex-col sm:flex-row justify-between items-start border-b border-[#ff6600]/20 pb-2">
+                  <div className="flex flex-col">
+                    <span>{person.name}</span>
+                    <span className="text-[#ff6600] text-[0.5rem] sm:text-[0.65rem]">{person.role}</span>
+                  </div>
+                  <div className="flex items-center gap-3 mt-2 sm:mt-0 ml-auto">
+                    <button
+                      onClick={() => copyPhone(person.num, person.display)}
+                      className="flex items-center gap-1.5 font-mono text-[0.7rem] sm:text-xs text-[#ffedd5]/90 hover:text-[#ffaa00] transition-colors cursor-pointer"
+                      title="Copy number"
+                    >
+                      {copiedPhone === person.display ? (
+                        <FaCheck size={10} className="text-green-400 shrink-0" />
+                      ) : (
+                        <FaCopy size={10} className="shrink-0 opacity-50" />
+                      )}
+                      {copiedPhone === person.display ? "Copied!" : person.display}
+                    </button>
+                    <a href={`https://wa.me/${person.wa}`} target="_blank" rel="noopener noreferrer" className="text-[#ff6600] hover:text-[#ffaa00] transition-colors shrink-0">
+                      <FaWhatsapp size={16} />
+                    </a>
+                  </div>
                 </div>
-                <div className="flex items-center gap-3 mt-2 sm:mt-0 ml-auto">
-                  <button
-                    onClick={() => copyPhone("+918779614123", "+91 87796 14123")}
-                    className="flex items-center gap-1.5 font-mono text-[0.7rem] sm:text-xs text-[#ffedd5]/90 hover:text-[#ffaa00] transition-colors cursor-pointer"
-                    title="Copy number"
-                  >
-                    {copiedPhone === "+91 87796 14123" ? (
-                      <FaCheck size={10} className="text-green-400 shrink-0" />
-                    ) : (
-                      <FaCopy size={10} className="shrink-0 opacity-50" />
-                    )}
-                    {copiedPhone === "+91 87796 14123" ? "Copied!" : "+91 87796 14123"}
-                  </button>
-                  <a href="https://wa.me/918779614123" target="_blank" rel="noopener noreferrer" className="text-[#ff6600] hover:text-[#ffaa00] transition-colors shrink-0">
-                    <FaWhatsapp size={16} />
-                  </a>
-                </div>
-              </div>
-              <div className="flex flex-col sm:flex-row justify-between items-start border-b border-[#ff6600]/20 pb-2">
-                <div className="flex flex-col">
-                  <span>Pranav Koradiya</span>
-                  <span className="text-[#ff6600] text-[0.5rem] sm:text-[0.65rem]">Project Cell Co-lead</span>
-                </div>
-                <div className="flex items-center gap-3 mt-2 sm:mt-0 ml-auto">
-                  <button
-                    onClick={() => copyPhone("+919769204570", "+91 97692 04570")}
-                    className="flex items-center gap-1.5 font-mono text-[0.7rem] sm:text-xs text-[#ffedd5]/90 hover:text-[#ffaa00] transition-colors cursor-pointer"
-                    title="Copy number"
-                  >
-                    {copiedPhone === "+91 97692 04570" ? (
-                      <FaCheck size={10} className="text-green-400 shrink-0" />
-                    ) : (
-                      <FaCopy size={10} className="shrink-0 opacity-50" />
-                    )}
-                    {copiedPhone === "+91 97692 04570" ? "Copied!" : "+91 97692 04570"}
-                  </button>
-                  <a href="https://wa.me/919769204570" target="_blank" rel="noopener noreferrer" className="text-[#ff6600] hover:text-[#ffaa00] transition-colors shrink-0">
-                    <FaWhatsapp size={16} />
-                  </a>
-                </div>
-              </div>
-              <div className="flex flex-col sm:flex-row justify-between items-start border-b border-[#ff6600]/20 pb-2">
-                <div className="flex flex-col">
-                  <span>Kunal Sarvaiya</span>
-                  <span className="text-[#ff6600] text-[0.5rem] sm:text-[0.65rem]">IEEE PR</span>
-                </div>
-                <div className="flex items-center gap-3 mt-2 sm:mt-0 ml-auto">
-                  <button
-                    onClick={() => copyPhone("+917900188666", "+91 79001 88666")}
-                    className="flex items-center gap-1.5 font-mono text-[0.7rem] sm:text-xs text-[#ffedd5]/90 hover:text-[#ffaa00] transition-colors cursor-pointer"
-                    title="Copy number"
-                  >
-                    {copiedPhone === "+91 79001 88666" ? (
-                      <FaCheck size={10} className="text-green-400 shrink-0" />
-                    ) : (
-                      <FaCopy size={10} className="shrink-0 opacity-50" />
-                    )}
-                    {copiedPhone === "+91 79001 88666" ? "Copied!" : "+91 79001 88666"}
-                  </button>
-                  <a href="https://wa.me/919700188666" target="_blank" rel="noopener noreferrer" className="text-[#ff6600] hover:text-[#ffaa00] transition-colors shrink-0">
-                    <FaWhatsapp size={16} />
-                  </a>
-                </div>
-                
-              </div>
-              
+              ))}
             </div>
-            
           </div>
-                  {/* Sponsor */}
-        <div className="mb-16 mt-10 flex w-full flex-col items-center justify-center gap-5 md:col-span-2">
-          <div className="text-[0.7rem] md:text-sm font-black tracking-[0.45em] text-[#ff6600] uppercase opacity-100 drop-shadow-[0_0_14px_rgba(255,102,0,0.7)]">
-            Sponsored By
-          </div>
-          <a
-            href="https://quillbot.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Visit QuillBot website"
-            className="group inline-flex items-center justify-center rounded-2xl border-2 border-[#ff6600]/70 bg-linear-to-r from-[#1a0900]/95 via-black/95 to-[#1a0900]/95 px-8 py-5 backdrop-blur-sm shadow-[0_0_0_1px_rgba(255,102,0,0.45),0_14px_34px_-12px_rgba(255,102,0,0.7)] transition-all duration-500 hover:-translate-y-1 hover:border-[#ffaa00] hover:shadow-[0_0_0_1px_rgba(255,170,0,0.55),0_18px_42px_-12px_rgba(255,170,0,0.75)]"
-          >
-            <Image
-              src="/sponsor.png"
-              alt="QuillBot sponsor logo"
-              width={340}
-              height={130}
-              className="h-auto w-auto max-h-20 object-contain transition-transform duration-500 group-hover:scale-[1.03]"
-            />
-          </a>
-        </div>
         </div>
 
       </motion.div>
-
-      <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-black/60 pointer-events-none" />
+      <div className="relative z-10 w-full mb-10">
+        <SponsorCarousel />
+      </div>
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/60 pointer-events-none" />
     </div>
   );
 }

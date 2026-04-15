@@ -1,3 +1,4 @@
+
 @import "tailwindcss";
 
 html {
@@ -258,6 +259,50 @@ body {
     100% {
         background-position: 200% center;
     }
+}
+
+/* Entry: slides ALL logos in from the far right edge of the screen */
+@keyframes sponsorEntry {
+    0% {
+        transform: translateX(100vw);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* Loop: scrolls exactly one-third (1 of 3 copies) to the left, then snaps back */
+@keyframes sponsorLoop {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-33.333%);
+    }
+}
+
+.sponsor-carousel-viewport {
+    overflow: hidden;
+    /* Ensure the track starts off-screen to the right before entry plays */
+    position: relative;
+}
+
+.sponsor-carousel-track {
+    will-change: transform;
+}
+
+/* Phase 1: fly in from the far right */
+.sponsor-carousel-track.entry {
+    animation: sponsorEntry 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Phase 2: seamless infinite scroll */
+.sponsor-carousel-track.loop {
+    animation: sponsorLoop 28s linear infinite;
+}
+
+.sponsor-carousel-viewport:hover .sponsor-carousel-track {
+    animation-play-state: paused;
 }
 
 .stat-shimmer {
