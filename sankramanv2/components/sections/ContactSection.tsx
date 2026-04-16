@@ -45,6 +45,8 @@ export default function ContactSection() {
     { src: "/1/8.png", alt: "No Escape sponsor logo", baseZoom: 1.7 },
     { src: "/1/9.png", alt: "ocean sponsor logo", baseZoom: 1.6 },
     { src: "/1/11.png", alt: "smaash sponsor logo", baseZoom: 1.7 },
+    { src: "/1/12.png", alt: "smaash sponsor logo", baseZoom: 1.7 },
+    { src: "/1/13.png", alt: "smaash sponsor logo", baseZoom: 1.7 },
   ];
 
   const SponsorCarousel = () => (
